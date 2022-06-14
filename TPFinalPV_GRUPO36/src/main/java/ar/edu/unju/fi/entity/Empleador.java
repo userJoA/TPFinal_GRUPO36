@@ -2,7 +2,20 @@ package ar.edu.unju.fi.entity;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Empleador {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name ="id_emp")
+	private Long id;
+	
 	private int cuit;
 	private int contraseña;
 	private String razon_social;
