@@ -7,7 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -23,36 +27,49 @@ public class Empleador {
 	@Column(name = "emp_cuit")
 	private int cuit;
 	
+	@NotEmpty(message="Este campo no puede estar vacio")
+	@Size(min=8,message = "la contraseña debe tener como minimo 8 caracteres") 
 	@Column(name = "emp_password")
 	private int password;
 	
+	@NotEmpty(message="Este campo no puede estar vacio")
 	@Column(name = "emp_razonSocial")
 	private String razon_social;
 	
+	@NotEmpty(message="Este campo no puede estar vacio")
 	@Column(name = "emp_nombreComer")
 	private String nombre_comercial;
 	
+	@NotNull @Past(message="La fecha debe ser anterior")
 	@Column(name = "emp_fechadeIncio")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate inicio;
 	
+	@NotEmpty(message="Este campo no puede estar vacio")
+	@Email(message="Email no valido")
 	@Column(name = "emp_email")
 	private String email;
+	
 	
 	@Column(name = "emp_telefono")
 	private int telefono;
 	
+	@NotEmpty(message="Este campo no puede estar vacio")
 	@Column(name = "emp_direccion")
 	private String direccion;
 	
+	@NotEmpty(message="Este campo no puede estar vacio")
 	@Column(name = "emp_provincia")
 	private String provincia;
 	
+	@NotEmpty(message="Este campo no puede estar vacio")
 	@Column(name = "emp_pagina")
 	private String pagina;
 	
+	
 	@Column(name = "emp_descripcion")
 	private String descripcion;
+	
 	
 	@Column(name = "emp_estado")
 	private boolean estado;

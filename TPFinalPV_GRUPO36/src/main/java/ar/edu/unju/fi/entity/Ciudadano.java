@@ -15,6 +15,8 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+
 import javax.validation.constraints.PositiveOrZero;
 import javax.validation.constraints.Size;
 
@@ -61,7 +63,7 @@ public class Ciudadano {
 	@Column(name = "ciu_telefono") 
 	private int telefono;
 	
-	@NotNull @FutureOrPresent(message="La fecha debe ser hoy o posterior")
+	@NotNull @Past(message="La fecha debe ser anterior")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "ciu_fecha_nac")
 	private LocalDate fecha_nac;

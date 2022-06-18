@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cursos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" /> 
+ 	<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+		
+    
+</head>
+
+<body>
+    <div class="container">
+        <header th:replace="layouts/header :: header"></header>
+        <nav th:replace="layouts/nav :: nav"></nav>
+        	<div class="card">
+					<div class="card-header">
+						<h3> Listado Ciudadanos</h3>
+					</div>
+					<div class="card-body">
+						  <table id="userList" class="table table-bordered table-striped ">
+							<thead class="thead-dark">
+									<tr>
+									<th scope="col">DNI</th>
+									<th scope="col">Nro Tramite</th>                    
+									<th scope="col">Email</th>
+									<th scope="col">Estado civil</th>
+									<th scope="col">Provincia</th>
+									<th scope="col">Telefono</th>
+									<th scope="col">Fecha nacimiento</th>
+									<th scope="col">Password</th>
+									<th scope="col">estado</th>
+									<th scope="col">editar</th>
+									<th scope="col">eliminar</th>
+									</tr>	
+							</thead>
+							<tbody>
+								    <tr th:each="ciudadano: ${ciudadanos}">
+										<td th:text="${ciudadano.dni}"></td>
+										<td th:text="${ciudadano.numero_tramite}"></td>
+										<td th:text="${ciudadano.email}"></td>
+										<td th:text="${ciudadano.estado_civil}"></td>
+										<td th:text="${ciudadano.provincia}"></td>
+										<td th:text="${ciudadano.telefono}"></td>
+										<td th:text="${#temporals.format(ciudadano.fecha_nac, 'dd/MM/yyyy')}"></td>
+										<td th:text="${ciudadano.password}"></td>
+										<td th:text="${ciudadano.estado}"></td>
+										
+										<td style="justify-content: space-around;"> 
+											 <a th:href="@{'/ciudadano/modificar/' + ${ciudadano.id}}" ><i class="fa-solid fa-comment-pen"></i></a></td>
+									    <!-- <td> <a th:onclick="'javascript:confirmarEliminar(/''+${ciudadano.id}+'/');'" ><i class="fa-solid fa-trash"></i></a></td> -->
+										<td  ><a th:href="@{'/ciudadano/eliminar/' + ${ciudadano.id}}"><i class="fa-solid fa-trash"></i></a></td>
+								   </tr>
+							</tbody>
+					    </table>
+					  </div>
+    	<footer th:replace="layouts/footer :: footer"></footer>
+      </div>
+  </div>
+    <script type="text/javascript" th:src="@{/webjars/jquery/3.6.0/jquery.min.js}"></script>
+		<script type="text/javascript" th:src="@{/webjars/popper.js/2.9.3/umd/popper.min.js}"></script>
+		<script type="text/javascript" th:src="@{/webjars/bootstrap/5.1.3/js/bootstrap.min.js}"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.js" integrity="sha512-TsDUjQW16/G8fz4gmgTOBW2s2Oi6TPUtQ6/hm+TxZZdkQtQrK5xEFIE0rgDuz5Cl1xQU1u3Yer7K5IuuBeiCqw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+
+</html>
