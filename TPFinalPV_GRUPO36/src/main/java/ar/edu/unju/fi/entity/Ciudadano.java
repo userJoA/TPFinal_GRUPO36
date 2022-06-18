@@ -8,9 +8,24 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+
+import javax.validation.constraints.PositiveOrZero;
+import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.stereotype.Component;
 
 
 @Entity
+@Component
 @Table(name="Ciudadano")
 public class Ciudadano {
 	
@@ -19,15 +34,49 @@ public class Ciudadano {
 	@Column(name ="id_ciu")
 	private Long id;
 	
-	private int dni;
-	private int numero_tramite;
-	private String email;
-	private String estado_civil;
-	private String provincia;
-	private int telefono;
-	private LocalDate fecha_nac;
-	private int contraseña;
 	
+	@Min(value=10000000, message="Debe ser mayor a 1000000") 
+	@Max(value=99999999,message="Debe ser menor a 99999999")
+	@Column(name = "ciu_dni")
+	private int dni;
+	
+	@NotNull
+	@PositiveOrZero
+	@Column(name = "ciu_numeroTramite") 
+	private int numero_tramite;
+	
+	@NotEmpty(message="Este campo no puede estar vacio")
+	@Email(message="Email no valido")
+	@Column(name = "ciu_email") 
+	private String email;
+	
+	@NotEmpty(message="Este campo no puede estar vacio")
+	@Column(name = "ciu_estadoCivil") 
+	private String estado_civil;
+	
+	@NotEmpty(message="Este campo no puede estar vacio")
+	@Column(name = "ciu_provincia") 
+	private String provincia;
+	
+	
+	
+	@Column(name = "ciu_telefono") 
+	private int telefono;
+	
+	@NotNull @Past(message="La fecha debe ser anterior")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Column(name = "ciu_fecha_nac")
+	private LocalDate fecha_nac;
+	
+	
+	@NotEmpty(message="Este campo no puede estar vacio")
+	@Size(min=8,message = "la contraseña debe tener como minimo 8 caracteres")
+	@Column(name = "ciu_password") 
+	private String password;
+	
+
+	@Column(name = "ciu_estado") 
+	private boolean estado;
 	
 	
 	
@@ -38,11 +87,10 @@ public class Ciudadano {
 
 
 
-
-
-	public Ciudadano(int dni, int numero_tramite, String email, String estado_civil, String provincia, int telefono,
-			LocalDate fecha_nac, int contraseña) {
+	public Ciudadano(Long id,int dni, int numero_tramite,String email,String estado_civil,String provincia,int telefono,LocalDate fecha_nac,String password, boolean estado) 
+	{
 		super();
+		this.id = id;
 		this.dni = dni;
 		this.numero_tramite = numero_tramite;
 		this.email = email;
@@ -50,7 +98,19 @@ public class Ciudadano {
 		this.provincia = provincia;
 		this.telefono = telefono;
 		this.fecha_nac = fecha_nac;
-		this.contraseña = contraseña;
+		this.password = password;
+		this.estado = estado;
+	}
+
+	public boolean isEstado() {
+		return estado;
+	}
+
+
+
+
+	public void setEstado(boolean estado) {
+		this.estado = estado;
 	}
 
 
@@ -169,19 +229,28 @@ public class Ciudadano {
 
 
 
-	public int getContraseña() {
-		return contraseña;
+	public String getPassword() {
+		return password;
 	}
 
 
 
 
 
-	public void setContraseña(int contraseña) {
-		this.contraseña = contraseña;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 
+
+	public Long getId() {
+		return id;
+	}
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 
 
@@ -189,7 +258,7 @@ public class Ciudadano {
 	public String toString() {
 		return "ciudadano [dni=" + dni + ", numero_tramite=" + numero_tramite + ", email=" + email + ", estado_civil="
 				+ estado_civil + ", provincia=" + provincia + ", telefono=" + telefono + ", fecha_nac=" + fecha_nac
-				+ ", contraseña=" + contraseña + "]";
+				+ ", contraseña=" + password + "]";
 	}
 	
 	

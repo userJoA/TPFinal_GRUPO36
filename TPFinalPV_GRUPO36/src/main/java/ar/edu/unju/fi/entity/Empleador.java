@@ -7,6 +7,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Empleador {
@@ -16,17 +23,58 @@ public class Empleador {
 	@Column(name ="id_emp")
 	private Long id;
 	
+	
+	@Column(name = "emp_cuit")
 	private int cuit;
-	private int contraseña;
+	
+	@NotEmpty(message="Este campo no puede estar vacio")
+	@Size(min=8,message = "la contraseña debe tener como minimo 8 caracteres") 
+	@Column(name = "emp_password")
+	private int password;
+	
+	@NotEmpty(message="Este campo no puede estar vacio")
+	@Column(name = "emp_razonSocial")
 	private String razon_social;
+	
+	@NotEmpty(message="Este campo no puede estar vacio")
+	@Column(name = "emp_nombreComer")
 	private String nombre_comercial;
+	
+	@NotNull @Past(message="La fecha debe ser anterior")
+	@Column(name = "emp_fechadeIncio")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate inicio;
+	
+	@NotEmpty(message="Este campo no puede estar vacio")
+	@Email(message="Email no valido")
+	@Column(name = "emp_email")
 	private String email;
+	
+	
+	@Column(name = "emp_telefono")
 	private int telefono;
+	
+	@NotEmpty(message="Este campo no puede estar vacio")
+	@Column(name = "emp_direccion")
 	private String direccion;
+	
+	@NotEmpty(message="Este campo no puede estar vacio")
+	@Column(name = "emp_provincia")
 	private String provincia;
+	
+	@NotEmpty(message="Este campo no puede estar vacio")
+	@Column(name = "emp_pagina")
 	private String pagina;
+	
+	
+	@Column(name = "emp_descripcion")
 	private String descripcion;
+	
+	
+	@Column(name = "emp_estado")
+	private boolean estado;
+	
+	
 	
 	
 	
@@ -36,9 +84,51 @@ public class Empleador {
 
 
 
+
+
+	public Empleador(int cuit, int password, String razon_social, String nombre_comercial, LocalDate inicio,
+			String email, int telefono, String direccion, String provincia, String pagina, String descripcion,
+			boolean estado) {
+		super();
+		this.cuit = cuit;
+		this.password = password;
+		this.razon_social = razon_social;
+		this.nombre_comercial = nombre_comercial;
+		this.inicio = inicio;
+		this.email = email;
+		this.telefono = telefono;
+		this.direccion = direccion;
+		this.provincia = provincia;
+		this.pagina = pagina;
+		this.descripcion = descripcion;
+		this.estado = estado;
+	}
+
+
+
+
+
+	public Long getId() {
+		return id;
+	}
+
+
+
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+
+
+
 	public int getCuit() {
 		return cuit;
 	}
+
+
 
 
 
@@ -48,15 +138,21 @@ public class Empleador {
 
 
 
-	public int getContraseña() {
-		return contraseña;
+
+
+	public int getPassword() {
+		return password;
 	}
 
 
 
-	public void setContraseña(int contraseña) {
-		this.contraseña = contraseña;
+
+
+	public void setPassword(int password) {
+		this.password = password;
 	}
+
+
 
 
 
@@ -66,9 +162,13 @@ public class Empleador {
 
 
 
+
+
 	public void setRazon_social(String razon_social) {
 		this.razon_social = razon_social;
 	}
+
+
 
 
 
@@ -78,9 +178,13 @@ public class Empleador {
 
 
 
+
+
 	public void setNombre_comercial(String nombre_comercial) {
 		this.nombre_comercial = nombre_comercial;
 	}
+
+
 
 
 
@@ -90,9 +194,13 @@ public class Empleador {
 
 
 
+
+
 	public void setInicio(LocalDate inicio) {
 		this.inicio = inicio;
 	}
+
+
 
 
 
@@ -102,9 +210,13 @@ public class Empleador {
 
 
 
+
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+
 
 
 
@@ -114,9 +226,13 @@ public class Empleador {
 
 
 
+
+
 	public void setTelefono(int telefono) {
 		this.telefono = telefono;
 	}
+
+
 
 
 
@@ -126,9 +242,13 @@ public class Empleador {
 
 
 
+
+
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
+
+
 
 
 
@@ -138,9 +258,13 @@ public class Empleador {
 
 
 
+
+
 	public void setProvincia(String provincia) {
 		this.provincia = provincia;
 	}
+
+
 
 
 
@@ -150,9 +274,13 @@ public class Empleador {
 
 
 
+
+
 	public void setPagina(String pagina) {
 		this.pagina = pagina;
 	}
+
+
 
 
 
@@ -162,22 +290,44 @@ public class Empleador {
 
 
 
+
+
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
 
 
 
+
+
+	public boolean isEstado() {
+		return estado;
+	}
+
+
+
+
+
+	public void setEstado(boolean estado) {
+		this.estado = estado;
+	}
+
+
+
+
+
 	@Override
 	public String toString() {
-		return "empleador [cuit=" + cuit + ", contraseña=" + contraseña + ", razon_social=" + razon_social
+		return "Empleador [id=" + id + ", cuit=" + cuit + ", password=" + password + ", razon_social=" + razon_social
 				+ ", nombre_comercial=" + nombre_comercial + ", inicio=" + inicio + ", email=" + email + ", telefono="
 				+ telefono + ", direccion=" + direccion + ", provincia=" + provincia + ", pagina=" + pagina
-				+ ", descripcion=" + descripcion + "]";
+				+ ", descripcion=" + descripcion + ", estado=" + estado + "]";
 	}
+
+
 	
 	
-	
+
 	
 	
 	
