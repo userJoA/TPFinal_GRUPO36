@@ -1,26 +1,84 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Curriculum</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <!--<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}" />
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crear Mi CV</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+	integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"	crossorigin="anonymous">
+<!--<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}" />
 <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">-->
 </head>
 
 <body>
-    <div class="container">
+	<div class="container">
+	
         <header th:replace="layouts/header :: header"></header>
         <nav th:replace="layouts/nav :: nav"></nav>
-        <main>
+		
+		<main>
+		
+			<form role="form" th:action="@{/cv/guardar}" method="POST" th:object="${curriculum}" class="col-md-9" id="formCv"><!--   -->
+				<h3 class="text-center">Curriculum Vitae</h3>				
 
-        </main>
-        <footer th:replace="layouts/footer :: footer"></footer>
-    </div>
+				<div class="card border-secondary mb-3">
+					<div class="card-header">Datos Académicos (Títulos / Carreras)</div>
+					<div class="card-body">
+						<textarea  class="form-control" id="txtTitulo" rows="6"></textarea>	<!-- th:field="*{estudio}" -->						
+					</div>
+					<div class="card-footer fs-6 fst-italic">
+						MesAño(Inicio) - MesAño(Final): Nombre de carrera o de Título - Nombre de Institución - Breve descripción
+					</div>
+				</div>						
+									
+				<div class="card border-secondary mb-3">
+					<div class="card-header">Cursos realizados</div>
+					<div class="card-body">
+						<textarea  class="form-control" id="txtCurso" rows="6"></textarea><!-- th:field="*{curso}" -->								
+					</div>
+					<div class="card-footer fs-6 fst-italic">
+						MesAño(Inicio) - MesAño(Final): Nombre del curso - Nombre de Institución - Detalles
+					</div>
+				</div>
+
+				<div class="card border-secondary mb-3">
+					<div class="card-header">Conocimientos</div>
+					<div class="card-body">
+						<textarea  class="form-control" id="txtSaber" rows="6"></textarea>	<!-- th:field="*{conocimiento}" -->							
+					</div>
+					<div class="card-footer fs-6 fst-italic">Nombre del conocimiento o habilidad que tiene</div>
+				</div>
+				
+				<div class="card border-secondary mb-3">
+					<div class="card-header">Experiencia Laboral</div>
+					<div class="card-body">
+						<textarea class="form-control" id="txtTrabajo" rows="6"></textarea>	<!-- th:field="*{experienciaLaboral}"  -->						
+					</div>
+					<div class="card-footer fs-6 fst-italic">
+						MesAño(Inicio) - MesAño(Final): Nombre del puesto - Lugar de Trabajo - Función
+					</div>
+				</div>
+			
+				<div class="card border-secondary mb-3">
+					<div class="card-header">Carta de Presentación</div>
+					<div class="card-body">
+						<div class="mb-3">									
+							<textarea  class="form-control" id="txtCarta" rows="6"></textarea><!-- th:field="*{presentacion}" -->
+						</div>
+					</div>
+				</div>
+				
+				<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+					<button class="btn btn-primary me-md-2" type="submit">Enviar</button>
+					<button class="btn btn-secondary" type="reset">Cancelar</button>
+				</div>
+					
+			</form>
+		</main>
+		<footer th:replace="layouts/footer :: footer"></footer>
+	</div>
 </body>
 
 </html>
