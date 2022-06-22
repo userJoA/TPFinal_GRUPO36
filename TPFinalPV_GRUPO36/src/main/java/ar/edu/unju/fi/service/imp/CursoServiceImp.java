@@ -3,11 +3,13 @@ package ar.edu.unju.fi.service.imp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import ar.edu.unju.fi.entity.Curso;
 import ar.edu.unju.fi.repository.ICursoRepository;
 import ar.edu.unju.fi.service.ICursoService;
 
+@Service
 public class CursoServiceImp implements ICursoService {
 
 	@Autowired
