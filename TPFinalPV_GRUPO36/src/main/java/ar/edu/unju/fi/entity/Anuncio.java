@@ -7,8 +7,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+
 @Entity
 @Table(name = "anuncios")
+@Component
 public class Anuncio {
 	
 	@Id
@@ -34,6 +37,9 @@ public class Anuncio {
 	@Column(name= "anu_salario")
 	private Double salario;
 	
+	@Column(name ="anu_requisitos")
+	private String requisitos;
+	
 	@Column(name = "anu_beneficios")
 	private String beneficios;
 	
@@ -47,7 +53,7 @@ public class Anuncio {
 	
 	
 	public Anuncio() {
-		
+		super();
 	}
 	
 	
@@ -107,6 +113,16 @@ public class Anuncio {
 		this.salario = salario;
 	}
 	
+	public String getRequisitos() {
+		return requisitos;
+	}
+
+
+	public void setRequisitos(String requisitos) {
+		this.requisitos = requisitos;
+	}
+
+
 	public String getBeneficios() {
 		return beneficios;
 	}
