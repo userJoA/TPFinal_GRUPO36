@@ -41,7 +41,7 @@ public class CurriculumController {
 			return mav;
 		}
 		ModelAndView mav = new ModelAndView("Principal");
-		LOGGER.info("nuevo cv: "+curriculum.getIdCV());
+		LOGGER.info("nuevo cv: "+curriculum.getEstudio());
 		if(this.cvService.guardarCv(curriculum))
 			LOGGER.info("Se guardó curriculum");
 		mav.addObject("curriculum", this.cvService.getCv());
