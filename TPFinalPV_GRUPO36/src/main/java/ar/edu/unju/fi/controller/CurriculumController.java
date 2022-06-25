@@ -27,7 +27,7 @@ public class CurriculumController {
 
 	@GetMapping("/nuevo")
 	public String getFormCV(Model model) {
-		model.addAttribute("miCV", cvService.getCv());
+		model.addAttribute("curriculum", cvService.getCv());
 		//return "ciudadano/form_cv_alta";
 		return "ciudadano/cv_ciudadano";
 	}
@@ -42,6 +42,7 @@ public class CurriculumController {
 		}
 		ModelAndView mav = new ModelAndView("Principal");
 		LOGGER.info("nuevo cv: "+curriculum.getEstudio());
+		curriculum.fecharCreacionCV();
 		if(this.cvService.guardarCv(curriculum))
 			LOGGER.info("Se guardó curriculum");
 		mav.addObject("curriculum", this.cvService.getCv());
