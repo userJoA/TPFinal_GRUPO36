@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import ar.edu.unju.fi.entity.Curriculum;
 
 @Repository
-public interface ICurriculumRepository extends JpaRepository<Curriculum, Long>{
+public interface ICurriculumRepository extends JpaRepository<Curriculum,Long>{
 
 }

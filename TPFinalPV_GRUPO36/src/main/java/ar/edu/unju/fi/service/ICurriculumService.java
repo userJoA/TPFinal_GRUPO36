@@ -8,7 +8,7 @@ import ar.edu.unju.fi.entity.Curriculum;
 public interface ICurriculumService {
 	
 	public Curriculum getCv();
-	public boolean guardarCv(Curriculum cv);
+	public boolean guardarCv(Curriculum curriculum);
 	public void modificarCv(Curriculum cv);
 	public void eliminarCv(Long id);
 	public Optional<Curriculum> buscarCv(Long idCv);
