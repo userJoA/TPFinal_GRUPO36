@@ -3,23 +3,21 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Cursos</title>
+    <title>Registro Ciudadano</title>
+    <link rel="shortcut icon" th:href="@{/images/iconoCV.png}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" /> 
  	<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}">
-	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
-		
-    
+	<link rel="stylesheet" type="text/css" th:href="@{/css/Style.css}">	
 </head>
+<body class="fondo">
 
-<body>
-    <div class="container">
-      <header th:replace="layouts/header :: header"></header>
-        <nav th:replace="layouts/nav :: nav"></nav>
-        
-    		<div class="card">
+	<header th:replace="layouts/header :: header"></header>
+
+    <div class="container">      
+        <main>
+    		<div class="card traslucido text-white col-md-8 offset-md-2">
 			       <div class="card-header">
-			       		<h4>ALTA CIUDADANO</h4>
-			       		
+			       		<h4 class="text-center">ALTA CIUDADANO</h4>			       		
 			       </div>
 			       <div class="card-body">
 			       		 <form role="form" th:action="@{/ciudadano/formulario}" method="POST" th:object="${ciudadano}" class="form">
@@ -116,17 +114,16 @@
 									  </div>
 					        </form>   
 			          </div>
-			     </div>
-    
-    
-    
-    
-       <footer th:replace="layouts/footer :: footer"></footer>
+			     </div>       
+       </main>
     </div>
+    <br>
+    <footer th:replace="layouts/footer :: footer"></footer>
+    
     <script type="text/javascript" th:src="@{/webjars/jquery/3.6.0/jquery.min.js}"></script>
-		<script type="text/javascript" th:src="@{/webjars/popper.js/2.9.3/umd/popper.min.js}"></script>
-		<script type="text/javascript" th:src="@{/webjars/bootstrap/5.1.3/js/bootstrap.min.js}"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.js" integrity="sha512-TsDUjQW16/G8fz4gmgTOBW2s2Oi6TPUtQ6/hm+TxZZdkQtQrK5xEFIE0rgDuz5Cl1xQU1u3Yer7K5IuuBeiCqw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script type="text/javascript" th:src="@{/webjars/popper.js/2.9.3/umd/popper.min.js}"></script>
+	<script type="text/javascript" th:src="@{/webjars/bootstrap/5.1.3/js/bootstrap.min.js}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.js" integrity="sha512-TsDUjQW16/G8fz4gmgTOBW2s2Oi6TPUtQ6/hm+TxZZdkQtQrK5xEFIE0rgDuz5Cl1xQU1u3Yer7K5IuuBeiCqw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
 
 </html>
