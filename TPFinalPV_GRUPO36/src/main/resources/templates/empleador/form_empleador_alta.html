@@ -22,7 +22,7 @@
 			 <div class="card-body">
 			     <form role="form" th:action="@{/empleador/guardar}" method="POST" th:object="${empleador}" class="form">
 					
-					  <div class="form-group row">
+					  <div class="form-group row mb-3">
 					    <label for="inputDni" class="col-lg-3 col-form-label form-control-label">Cuit</label>
 					    <div class="col-lg-9">
 					    	<input th:field="*{cuit}" type="number" class="form-control" id="inputDni">
@@ -30,7 +30,7 @@
 					    <!-- <div class="text-danger" th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}"></div> -->
 					  </div>
 					  
-					  <div class="form-group row">
+					  <div class="form-group row mb-3">
 					    <label class="col-lg-3 col-form-label form-control-label">Contraseña</label>
 					    <div class="col-lg-9">
 					    	<input th:field="*{password}" type="password" class="form-control">
@@ -39,7 +39,7 @@
 					  </div>
 					  
 					  
-					  <div class="form-group row">
+					  <div class="form-group row mb-3">
 					    <label class="col-lg-3 col-form-label form-control-label">Razon Social</label>
 					    <div class="col-lg-9">
 					    	<input th:field="*{razon_social}" type="text" class="form-control" >
@@ -47,7 +47,7 @@
 					    <!-- <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div> -->
 					  </div>
 					  
-					  <div class="form-group row">
+					  <div class="form-group row mb-3">
 					    <label class="col-lg-3 col-form-label form-control-label">Nombre Comercial</label>
 					    <div class="col-lg-9">
 					    	<input th:field="*{nombre_comercial}" type="text" class="form-control" >
@@ -55,7 +55,7 @@
 					    <!-- <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div> -->
 					  </div>
 					  
-					  <div class="form-group row">
+					  <div class="form-group row mb-3">
 					    <label class="col-lg-3 col-form-label form-control-label">Fecha de Inicio</label>
 					    <div class="col-lg-9">
 					    	<input th:field="*{inicio}" type="date" class="form-control" >
@@ -63,7 +63,7 @@
 					    <!-- <div class="text-danger" th:if="${#fields.hasErrors('fecha_nac')}" th:errors="*{fecha_nac}"></div> -->
 					  </div>
 					  
-					  <div class="form-group row">
+					  <div class="form-group row mb-3">
 					    <label class="col-lg-3 col-form-label form-control-label">Email</label>
 					    <div class="col-lg-9">
 					    	<input th:field="*{email}" type="email" class="form-control" >
@@ -71,7 +71,7 @@
 					   <!--  <div class="text-danger" th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></div> -->
 					  </div>
 					  
-					  <div class="form-group row">
+					  <div class="form-group row mb-3">
 					    <label class="col-lg-3 col-form-label form-control-label">Telefono</label>
 					    <div class="col-lg-9">
 					    	<input th:field="*{telefono}" type="tel" class="form-control" >
@@ -79,7 +79,7 @@
 					    <!-- <div class="text-danger" th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></div> -->
 					  </div>
 					  
-					  <div class="form-group row">
+					  <div class="form-group row mb-3">
 					    <label class="col-lg-3 col-form-label form-control-label">Direccion</label>
 					    <div class="col-lg-9">
 					    	<input th:field="*{direccion}" type="text" class="form-control" >
@@ -87,7 +87,7 @@
 					   <!--  <div class="text-danger" th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></div> -->
 					  </div>
 					  
-					  <div class="form-group row">
+					  <div class="form-group row mb-3">
 					    <label class="col-lg-3 col-form-label form-control-label">Provincia</label>
 					    <div class="col-lg-9">
 					    	<input th:field="*{provincia}" type="text" class="form-control" >
@@ -95,7 +95,7 @@
 					    <!-- <div class="text-danger" th:if="${#fields.hasErrors('provincia')}" th:errors="*{provincia}"></div> -->
 					  </div>
 					  	  
-					  <div class="form-group row">
+					  <div class="form-group row mb-3">
 					    <label class="col-lg-3 col-form-label form-control-label">Pagina</label>
 					    <div class="col-lg-9">
 					    	<input th:field="*{pagina}" type="text" class="form-control" >
@@ -104,7 +104,7 @@
 					  </div>
 					  
 					  
-					  <div class="form-group row">
+					  <div class="form-group row mb-3">
 					    <label class="col-lg-3 col-form-label form-control-label">Descripcion</label>
 					    <div class="col-lg-9">
 					    	<input th:field="*{descripcion}" type="text" class="form-control" >
@@ -112,7 +112,7 @@
 					    <!-- <div class="text-danger" th:if="${#fields.hasErrors('estado')}" th:errors="*{estado}"></div> -->
 					  </div>
 					  
-					  <div class="form-group row">
+					  <div class="form-group row mb-3">
 					    <label class="col-lg-3 col-form-label form-control-label">Estado</label>
 					    <div class="col-lg-9">
 					    	<input class="form-control" th:field="*{estado}" type="text" >

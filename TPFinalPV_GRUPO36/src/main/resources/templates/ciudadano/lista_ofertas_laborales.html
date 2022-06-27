@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -18,8 +18,35 @@
     <nav th:replace="layouts/navCiudadano :: nav"></nav>
         
     <div class="container">        
-        <main>
+        <main>			
+			<h2 class="text-white">Ofertas Laborales</h2>
+			<br>
+			<div class="row rows-col-1 rows-col-sm-2 rows-col-lg-3">
+							
+				<div th:each="oferta : ${ofertas}" class="col">							
+				
+					<div class="card">
+						<div class="card-header">
+							<div class="row">
+								<h3 th:text="${oferta.nombreDePuesto}"></h3> <p th:text="${oferta.vacantes}+' puestos'"></p>
+							</div>
+						</div>						
+						<div class="card-body">														
+							<p th:text="${oferta.descripcionPuesto}" class="card-text"></p>
+							<p th:text="'Requisitos: '+${oferta.requisitos}"></p>
+							<p th:text="'Beneficios: '+${oferta.beneficios}"></p>
+							<p th:text="'Tareas: '+${oferta.funciones}"></p>
+							<p th:text="'Salario: $ '+${oferta.salario}"></p>
+							<p th:text="'Tiempo: '+${oferta.tiempoDisponible}"></p>
+						</div>
+						<div class="card-footer d-grid gap-2 d-md-flex justify-content-md-end">							
+							<a class="btn btn-primary btn-sm">Postularme</a>							
+						</div>						
+					</div>
+					
+				</div>				
 
+			</div>			
         </main>        
     </div>
     

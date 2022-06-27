@@ -22,7 +22,7 @@
 			       <div class="card-body">
 			       		 <form role="form" th:action="@{/ciudadano/formulario}" method="POST" th:object="${ciudadano}" class="form">
 							
-						 		      <div class="form-group row">
+						 		      <div class="form-group row mb-3">
 									    <label for="inputDni" class="col-lg-3 col-form-label form-control-label">DNI</label>
 									    <div class="col-lg-9">
 									    	<input th:field= "*{dni}" type="number" class="form-control" id="inputDni">
@@ -30,25 +30,23 @@
 									    <div class="text-danger" th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}"></div>
 									  </div>
 									  
-									  <div class="form-group row">
+									  <div class="form-group row mb-3">
 									    <label class="col-lg-3 col-form-label form-control-label">Nro_Tramite</label>
 									    <div class="col-lg-9">
 									    	<input th:field="*{numero_tramite}" type="number" class="form-control">
 									    </div>
 									    <div class="text-danger" th:if="${#fields.hasErrors('numero_tramite')}" th:errors="*{numero_tramite}"></div>
-									  </div>
+									  </div>									  
 									  
-									  
-									  <div class="form-group row">
+									  <div class="form-group row mb-3">
 									    <label class="col-lg-3 col-form-label form-control-label">Email</label>
 									    <div class="col-lg-9">
 									    	<input th:field="*{email}" type="email" class="form-control" >
 									    </div>
 									    <div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
-									  </div>
+									  </div>									  
 									  
-									  
-									  <div class="form-group row">
+									  <div class="form-group row mb-3">
 									    <label class="col-lg-3 col-form-label form-control-label">Estado Civil</label>
 									    <div class="col-lg-9">
 									    	<select th:field="*{estado_civil}" class="form-control">
@@ -59,28 +57,25 @@
 											</select>
 									    </div>
 									    <div class="text-danger" th:if="${#fields.hasErrors('estado_civil')}" th:errors="*{estado_civil}"></div>
-									  </div>
+									  </div>									  
 									  
-									  
-									  <div class="form-group row">
+									  <div class="form-group row mb-3">
 									    <label class="col-lg-3 col-form-label form-control-label">Provincia</label>
 									    <div class="col-lg-9">
 									    	<input th:field="*{provincia}" type="text" class="form-control" >
 									    </div>
 									    <div class="text-danger" th:if="${#fields.hasErrors('provincia')}" th:errors="*{provincia}"></div>
-									  </div>
+									  </div>									  
 									  
-									  
-									  <div class="form-group row">
+									  <div class="form-group row mb-3">
 									    <label class="col-lg-3 col-form-label form-control-label">Telefono</label>
 									    <div class="col-lg-9">
 									    	<input th:field="*{telefono}" type="tel" class="form-control" >
 									    </div>
 									    <div class="text-danger" th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></div>
-									  </div>
+									  </div>									  
 									  
-									  
-									  <div class="form-group row">
+									  <div class="form-group row mb-3">
 									    <label class="col-lg-3 col-form-label form-control-label">Fecha de Nacimiento</label>
 									    <div class="col-lg-9">
 									    	<input th:field="*{fecha_nac}" type="date" class="form-control" >
@@ -88,28 +83,24 @@
 									    <div class="text-danger" th:if="${#fields.hasErrors('fecha_nac')}" th:errors="*{fecha_nac}"></div>
 									  </div>
 									  
-									  <div class="form-group row">
+									  <div class="form-group row mb-3">
 									    <label class="col-lg-3 col-form-label form-control-label">Contraseña</label>
 									    <div class="col-lg-9">
 									    	<input th:field="*{password}" type="password" class="form-control" >
 									    </div>
 									    <div class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
-									  </div>
+									  </div>									  
 									  
-									  
-									  <div class="form-group row">
+									  <div class="form-group row mb-3">
 									    <label class="col-lg-3 col-form-label form-control-label">estado</label>
 									    <div class="col-lg-9">
 									    	<input th:field="*{estado}" type="text" class="form-control" >
 									    </div>
 									    <div class="text-danger" th:if="${#fields.hasErrors('estado')}" th:errors="*{estado}"></div>
-									  </div>
-									  
-									  <br>
-									  
+									  </div>									  
+									  <br>									  
 									  <div class="col-12" style="margin: auto;">
-									  	<a class="btn btn-secondary" th:href="@{/ciudadano/formulario}" >Cancel</a>
-									    
+									  	<a class="btn btn-secondary" th:href="@{/ciudadano/formulario}" >Cancel</a>									    
 									    <button type="submit" class="btn btn-primary">guardar</button>
 									  </div>
 					        </form>   
