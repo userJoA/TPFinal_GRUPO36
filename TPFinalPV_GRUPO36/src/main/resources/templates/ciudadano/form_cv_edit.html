@@ -13,14 +13,18 @@
 </head>
 
 <body>
-    <div class="container">
-        <header th:replace="layouts/header :: header"></header>
-        <nav th:replace="layouts/nav :: nav"></nav>
+
+	<header th:replace="layouts/header :: header"></header>
+    <nav th:replace="layouts/navCiudadano :: nav"></nav>
+        
+    <div class="container">        
         <main>
 
-        </main>
-        <footer th:replace="layouts/footer :: footer"></footer>
+        </main>        
     </div>
+    
+    <footer th:replace="layouts/footer :: footer"></footer>
+    
 </body>
 
 </html>
