@@ -29,15 +29,24 @@ public class AnuncioServiceImp implements IAnuncioService{
 	}
 
 	@Override
-	public Anuncio modificarAnuncio(Anuncio anuncio) {
-		// TODO Auto-generated method stub
-		return null;
+	public Anuncio modificarAnuncio(Anuncio anuncio) throws Exception{
+		Anuncio elAnuncio = this.buscarPorId(anuncio.getIdAnuncio());		
+		elAnuncio.setIdAnuncio(anuncio.getIdAnuncio());
+		elAnuncio.setBeneficios(anuncio.getBeneficios());
+		elAnuncio.setDescripcionPuesto(anuncio.getDescripcionPuesto());
+		elAnuncio.setDisponible(anuncio.getDisponible());
+		elAnuncio.setFunciones(anuncio.getFunciones());
+		elAnuncio.setNombreDePuesto(anuncio.getNombreDePuesto());
+		elAnuncio.setRequisitos(anuncio.getRequisitos());
+		elAnuncio.setSalario(anuncio.getSalario());
+		elAnuncio.setTiempoDisponible(anuncio.getTiempoDisponible());
+		elAnuncio.setVacantes(anuncio.getVacantes());		
+		return this.anuncioRepository.save(elAnuncio);
 	}
 
 	@Override
 	public void eliminarAnuncio(Long id) throws Exception {
-		// TODO Auto-generated method stub
-		
+		this.anuncioRepository.deleteById(id);
 	}
 
 	@Override
@@ -46,9 +55,8 @@ public class AnuncioServiceImp implements IAnuncioService{
 	}
 
 	@Override
-	public Anuncio buscarPorId(Long id) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public Anuncio buscarPorId(Long id) throws Exception {		
+		return this.anuncioRepository.findById(id).orElseThrow(()-> new Exception("Anuncio no existe") );
 	}
 
 }

@@ -131,7 +131,7 @@ public class Anuncio {
 		this.beneficios = beneficios;
 	}
 	
-	public boolean isDisponible() {
+	public boolean getDisponible() {
 		return disponible;
 	}
 	
@@ -139,7 +139,7 @@ public class Anuncio {
 		this.disponible = disponible;
 	}
 	
-	public boolean isEstado() {
+	public boolean getEstado() {
 		return estado;
 	}
 	
