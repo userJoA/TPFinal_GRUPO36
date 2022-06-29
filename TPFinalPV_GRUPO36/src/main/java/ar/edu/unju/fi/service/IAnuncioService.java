@@ -10,7 +10,7 @@ public interface IAnuncioService {
 	
 	public boolean guardarAnuncio(Anuncio anuncio);
 	
-	public Anuncio modificarAnuncio(Anuncio anuncio);
+	public Anuncio modificarAnuncio(Anuncio anuncio) throws Exception;
 	
 	public void eliminarAnuncio(Long id) throws Exception;
 	

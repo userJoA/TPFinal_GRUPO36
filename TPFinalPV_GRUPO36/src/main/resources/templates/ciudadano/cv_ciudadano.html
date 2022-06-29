@@ -6,6 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Crear Mi CV</title>
+	<link rel="shortcut icon" th:href="@{/images/iconoCV.png}">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
 	integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"	crossorigin="anonymous">
 <!--<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}" />-->
@@ -19,11 +20,11 @@
         
 	<div class="container">	
 		<main>
-		
-			<form role="form" th:action="@{/cv/guardar}" method="post" th:object="${curriculum}" class="col-md-9" id="formCv">
+			<div class="col-md-8 offset-md-2">
+			<form role="form" th:action="@{/cv/guardar}" method="post" th:object="${curriculum}" id="formCv">
 				<h3 class="text-center">Curriculum Vitae</h3>				
 
-				<div class="card border-secondary mb-3">
+				<div class="card traslucido text-white border-white mb-3">
 					<div class="card-header">Datos Académicos (Títulos / Carreras)</div>
 					<div class="card-body">
 						<textarea th:field="*{estudio}" class="form-control" id="txtTitulo" rows="6"></textarea>						
@@ -33,7 +34,7 @@
 					</div>
 				</div>						
 									
-				<div class="card border-secondary mb-3">
+				<div class="card traslucido text-white border-white mb-3">
 					<div class="card-header">Cursos realizados</div>
 					<div class="card-body">
 						<textarea th:field="*{curso}" class="form-control" id="txtCurso" rows="6"></textarea>								
@@ -43,7 +44,7 @@
 					</div>
 				</div>
 
-				<div class="card border-secondary mb-3">
+				<div class="card traslucido text-white border-white mb-3">
 					<div class="card-header">Conocimientos</div>
 					<div class="card-body">
 						<textarea th:field="*{conocimiento}" class="form-control" id="txtSaber" rows="6"></textarea>							
@@ -51,7 +52,7 @@
 					<div class="card-footer fs-6 fst-italic">Nombre del conocimiento o habilidad que tiene</div>
 				</div>
 				
-				<div class="card border-secondary mb-3">
+				<div class="card traslucido text-white border-white mb-3">
 					<div class="card-header">Experiencia Laboral</div>
 					<div class="card-body">
 						<textarea th:field="*{experienciaLaboral}" class="form-control" id="txtTrabajo" rows="6"></textarea>						
@@ -61,7 +62,7 @@
 					</div>
 				</div>
 			
-				<div class="card border-secondary mb-3">
+				<div class="card traslucido text-white border-white mb-3">
 					<div class="card-header">Carta de Presentación</div>
 					<div class="card-body">
 						<div class="mb-3">									
@@ -76,6 +77,8 @@
 				</div>
 					
 			</form>
+			
+			</div>
 		</main>		
 	</div>
 	
