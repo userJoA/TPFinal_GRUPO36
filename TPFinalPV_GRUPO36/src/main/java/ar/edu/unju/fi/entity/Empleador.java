@@ -1,12 +1,17 @@
 package ar.edu.unju.fi.entity;
 
+
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -14,9 +19,13 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.stereotype.Component;
 
 @Entity
-public class Empleador {
+@Component
+@Table(name="EMPLEADOR")
+public class Empleador{
+	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,12 +34,12 @@ public class Empleador {
 	
 	
 	@Column(name = "emp_cuit")
-	private int cuit;
+	private String cuit;
 	
 	@NotEmpty(message="Este campo no puede estar vacio")
 	@Size(min=8,message = "la contraseña debe tener como minimo 8 caracteres") 
 	@Column(name = "emp_password")
-	private int password;
+	private String password;
 	
 	@NotEmpty(message="Este campo no puede estar vacio")
 	@Column(name = "emp_razonSocial")
@@ -71,10 +80,12 @@ public class Empleador {
 	private String descripcion;
 	
 	
+	
 	@Column(name = "emp_estado")
 	private boolean estado;
 	
-	
+	@OneToMany(mappedBy="empleador")
+	private List<Anuncio> ofertas = new ArrayList<Anuncio>();
 	
 	
 	
@@ -83,13 +94,19 @@ public class Empleador {
 	}
 
 
-
-
-
-	public Empleador(int cuit, int password, String razon_social, String nombre_comercial, LocalDate inicio,
-			String email, int telefono, String direccion, String provincia, String pagina, String descripcion,
-			boolean estado) {
+	
+	public Empleador(Long id, String cuit,
+			String password,
+			String razon_social,
+			String nombre_comercial,
+			LocalDate inicio,
+			String email,
+			int telefono,String direccion,
+			String provincia,
+			String pagina, String descripcion, boolean estado,
+			List<Anuncio> ofertas) {
 		super();
+		this.id = id;
 		this.cuit = cuit;
 		this.password = password;
 		this.razon_social = razon_social;
@@ -102,8 +119,8 @@ public class Empleador {
 		this.pagina = pagina;
 		this.descripcion = descripcion;
 		this.estado = estado;
+		this.ofertas = ofertas;
 	}
-
 
 
 
@@ -114,17 +131,7 @@ public class Empleador {
 
 
 
-
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-
-
-
-
-	public int getCuit() {
+	public String getCuit() {
 		return cuit;
 	}
 
@@ -132,7 +139,7 @@ public class Empleador {
 
 
 
-	public void setCuit(int cuit) {
+	public void setCuit(String cuit) {
 		this.cuit = cuit;
 	}
 
@@ -140,7 +147,7 @@ public class Empleador {
 
 
 
-	public int getPassword() {
+	public String getPassword() {
 		return password;
 	}
 
@@ -148,7 +155,7 @@ public class Empleador {
 
 
 
-	public void setPassword(int password) {
+	public void setPassword(String password) {
 		this.password = password;
 	}
 
@@ -313,6 +320,32 @@ public class Empleador {
 	}
 
 
+	
+
+
+	public List<Anuncio> getOfertas() {
+		return ofertas;
+	}
+
+
+
+
+
+
+
+
+
+
+	public void setOfertas(List<Anuncio> ofertas) {
+		this.ofertas = ofertas;
+	}
+
+
+
+
+
+
+
 
 
 
@@ -324,10 +357,11 @@ public class Empleador {
 				+ ", descripcion=" + descripcion + ", estado=" + estado + "]";
 	}
 
-
-	
 	
 
+
+
+	
 	
 	
 	

@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -48,6 +50,11 @@ public class Anuncio {
 	
 	@Column(name = "anu_estado")
 	private boolean estado;
+	
+	@ManyToOne
+	@JoinColumn(name = "Emp_ID")
+	private Empleador empleador;
+	
 	//private Contacto contacto;
 	//private String jornada;
 	
@@ -146,5 +153,17 @@ public class Anuncio {
 	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
+
+
+	public Empleador getEmpleador() {
+		return empleador;
+	}
+
+
+	public void setEmpleador(Empleador empleador) {
+		this.empleador = empleador;
+	}
+	
+	
 	
 }
