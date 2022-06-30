@@ -41,7 +41,13 @@ main{
 }
 
 .fondo{
-	background-image: url("../images/empresas.png");
+	background-image: url("../images/fondoempr.jpg");
+	background-repeat:no-repeat;
+	background-size:cover;
+}
+
+.fondoCiud{
+	background-image: url("../images/fondociud.jpg");
 	background-repeat:no-repeat;
 	background-size:cover;
 }
