@@ -40,14 +40,19 @@ public class CurriculumController {
 			mav.addObject("curriculum", curriculum);
 			return mav;
 		}
-		ModelAndView mav = new ModelAndView("Principal");
+		ModelAndView mav = new ModelAndView("/ciudadano/portal_ciudadano");
 		LOGGER.info("nuevo cv: "+curriculum.getEstudio());
 		curriculum.fecharCreacionCV();
 		if(this.cvService.guardarCv(curriculum))
 			LOGGER.info("Se guardó curriculum");
-		mav.addObject("curriculum", this.cvService.getCv());
+		mav.addObject("curriculum", curriculum);
 		return mav;
 	}
 
+//	@GetMapping("/vista")
+//	public String mostrarCV(Model model) {
+//		model.addAttribute("cvitae", "");
+//		return "/ciudadano/portal_ciudadano";
+//	}
 	
 }
