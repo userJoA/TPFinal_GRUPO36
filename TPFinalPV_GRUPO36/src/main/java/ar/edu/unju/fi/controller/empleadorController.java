@@ -3,7 +3,7 @@ package ar.edu.unju.fi.controller;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +23,7 @@ import ar.edu.unju.fi.service.IEmpleadorService;
 @Controller
 public class empleadorController {
 	@Autowired 
+	@Qualifier("EmpleadorService")
 	IEmpleadorService empleadorService;
 	
 	private static final Log LOGGER = LogFactory.getLog(empleadorController.class);
@@ -56,14 +57,15 @@ public class empleadorController {
 	/* MODIFICAR */
 	
 	@GetMapping("/modificar/{id}")
-	public String getFormEdit(@PathVariable ("id") Long id,  Model model) {
-		model.addAttribute("empleador",empleadorService.buscarPorId(id));
+	public String getFormEdit(@PathVariable ("id") Long id,  Model model) throws Exception {
+		Empleador empleadorEdit=empleadorService.buscarPorId(id);
+		model.addAttribute("empleador",empleadorEdit);
 		LOGGER.info("Redirigiendo a formulario de edicion");
 		return "/empleador/form_empleador_edit";
 	}
 	
 	@PostMapping("/modificar")
-	public ModelAndView editEmpleador(@ModelAttribute ("empleador") Empleador empleador) {
+	public ModelAndView editEmpleador(@ModelAttribute ("empleador") Empleador empleador) throws Exception {
 		ModelAndView mav = new ModelAndView("redirect:/empleador/lista");
 		empleadorService.modificarEmpleador(empleador);
 		mav.addObject("empleadores", empleadorService.listaEmpleador());
