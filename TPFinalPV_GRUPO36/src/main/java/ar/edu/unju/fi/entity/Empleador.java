@@ -85,7 +85,7 @@ public class Empleador{
 	private boolean estado;
 	
 	@OneToMany(mappedBy="empleador")
-	private List<Anuncio> ofertas = new ArrayList<Anuncio>();
+	private List<Anuncio> anuncios = new ArrayList<Anuncio>();
 	
 	
 	
@@ -119,9 +119,27 @@ public class Empleador{
 		this.pagina = pagina;
 		this.descripcion = descripcion;
 		this.estado = estado;
-		this.ofertas = ofertas;
+		this.anuncios = ofertas;
 	}
 
+
+
+
+	public List<Anuncio> getAnuncios() {
+		return anuncios;
+	}
+
+
+
+	public void setAnuncios(List<Anuncio> anuncios) {
+		this.anuncios = anuncios;
+	}
+
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 
 
@@ -324,7 +342,7 @@ public class Empleador{
 
 
 	public List<Anuncio> getOfertas() {
-		return ofertas;
+		return anuncios;
 	}
 
 
@@ -337,7 +355,7 @@ public class Empleador{
 
 
 	public void setOfertas(List<Anuncio> ofertas) {
-		this.ofertas = ofertas;
+		this.anuncios = ofertas;
 	}
 
 
