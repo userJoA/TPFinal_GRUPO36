@@ -13,9 +13,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
+import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -32,8 +34,9 @@ public class Empleador{
 	@Column(name ="id_emp")
 	private Long id;
 	
-	
-	@Column(name = "emp_cuit")
+	@Positive(message = "El cuit debe ser un numero valido")
+     
+	@Column(name = "emp_cuit", nullable = false)
 	private String cuit;
 	
 	@NotEmpty(message="Este campo no puede estar vacio")
@@ -59,7 +62,7 @@ public class Empleador{
 	@Column(name = "emp_email")
 	private String email;
 	
-	
+	@Positive(message = "Debe tener valores positivos")
 	@Column(name = "emp_telefono")
 	private int telefono;
 	
