@@ -1,19 +1,21 @@
 package ar.edu.unju.fi.entity;
 
+
 import java.time.LocalDate;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.Future;
-import javax.validation.constraints.FutureOrPresent;
+
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
@@ -29,9 +31,12 @@ import org.springframework.stereotype.Component;
 
 @Entity
 @Component
+@PrimaryKeyJoinColumn(name="usu_id")
 @Table(name="Ciudadano")
-public class Ciudadano {
+public class Ciudadano extends Usuario{
 	
+
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name ="id_ciu")
@@ -64,7 +69,7 @@ public class Ciudadano {
 	
 	
 	@Column(name = "ciu_telefono") 
-	private int telefono;
+	private Long telefono;
 	
 	@NotNull @Past(message="La fecha debe ser anterior")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -85,6 +90,12 @@ public class Ciudadano {
 	@JoinColumn(name = "ciu_curriculum")
 	private Curriculum curriculum;
 	
+	@Column(name = "ciu_tipo") 
+	private String tipo;
+	
+	@OneToOne(fetch = FetchType.LAZY)
+	@PrimaryKeyJoinColumn
+	private Usuario usuario;
 	
 	public Ciudadano() {
 		super();
@@ -92,7 +103,7 @@ public class Ciudadano {
 
 
 
-	public Ciudadano(Long id,int dni, int numero_tramite,String email,String estado_civil,String provincia,int telefono,LocalDate fecha_nac,String password, boolean estado) 
+	public Ciudadano(Long id,int dni, int numero_tramite,String email,String estado_civil,String provincia,Long telefono,LocalDate fecha_nac,String password, boolean estado,String tipo) 
 	{
 		super();
 		this.id = id;
@@ -105,7 +116,20 @@ public class Ciudadano {
 		this.fecha_nac = fecha_nac;
 		this.password = password;
 		this.estado = estado;
+		this.tipo=tipo;
 	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+
 
 	public boolean isEstado() {
 		return estado;
@@ -202,19 +226,32 @@ public class Ciudadano {
 
 
 
-	public int getTelefono() {
+	
+
+
+
+
+	public Long getTelefono() {
 		return telefono;
 	}
 
 
 
-
-
-	public void setTelefono(int telefono) {
+	public void setTelefono(Long telefono) {
 		this.telefono = telefono;
 	}
 
 
+
+	public Curriculum getCurriculum() {
+		return curriculum;
+	}
+
+
+
+	public void setCurriculum(Curriculum curriculum) {
+		this.curriculum = curriculum;
+	}
 
 
 
@@ -263,7 +300,7 @@ public class Ciudadano {
 	public String toString() {
 		return "ciudadano [dni=" + dni + ", numero_tramite=" + numero_tramite + ", email=" + email + ", estado_civil="
 				+ estado_civil + ", provincia=" + provincia + ", telefono=" + telefono + ", fecha_nac=" + fecha_nac
-				+ ", contraseña=" + password + "]";
+				+ ", contraseña=" + password + ",tipo="+tipo+ "]";
 	}
 	
 	
