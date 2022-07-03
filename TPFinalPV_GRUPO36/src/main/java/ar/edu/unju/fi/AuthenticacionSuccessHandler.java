@@ -28,11 +28,11 @@ public class AuthenticacionSuccessHandler implements AuthenticationSuccessHandle
 		boolean tipoCiudadano = false;
 		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
 		for (GrantedAuthority grantedAuthority : authorities) {
-			if (grantedAuthority.getAuthority().equals("ADMIN")) {
+			if (grantedAuthority.getAuthority().equals("tipoAdmin")) {
 				tipoAdmin = true;
 				break;
 			} else {
-				if (grantedAuthority.getAuthority().equals("EMPLEADOR")) {
+				if (grantedAuthority.getAuthority().equals("tipoEmpleador")) {
 					tipoEmpleador = true;
 					break;
 			} else {
