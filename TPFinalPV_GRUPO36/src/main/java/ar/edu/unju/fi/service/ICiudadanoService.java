@@ -16,7 +16,7 @@ public interface ICiudadanoService {
 	
 	public void eliminarCiudadano(Long id) throws Exception;
 	
-	public Ciudadano buscarCiudadanoPorDni(int dni);
+	//public Ciudadano buscarCiudadanoPorDni(int dni);
 	
 	public Ciudadano buscarPorId(Long id) throws Exception;
 	
