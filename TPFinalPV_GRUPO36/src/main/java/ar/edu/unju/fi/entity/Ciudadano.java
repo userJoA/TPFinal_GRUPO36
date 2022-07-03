@@ -16,14 +16,12 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
 import javax.validation.constraints.PositiveOrZero;
-import javax.validation.constraints.Size;
+
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
@@ -42,11 +40,6 @@ public class Ciudadano extends Usuario{
 	@Column(name ="id_ciu")
 	private Long id;
 	
-	
-	@Min(value=10000000, message="Debe ser mayor a 1000000") 
-	@Max(value=99999999,message="Debe ser menor a 99999999")
-	@Column(name = "ciu_dni")
-	private int dni;
 	
 	@NotNull
 	@PositiveOrZero
@@ -77,10 +70,10 @@ public class Ciudadano extends Usuario{
 	private LocalDate fecha_nac;
 	
 	
-	@NotEmpty(message="Este campo no puede estar vacio")
-	@Size(min=8,message = "la contraseña debe tener como minimo 8 caracteres")
-	@Column(name = "ciu_password") 
-	private String password;
+	//@NotEmpty(message="Este campo no puede estar vacio")
+	//@Size(min=8,message = "la contraseña debe tener como minimo 8 caracteres")
+	//@Column(name = "ciu_password") 
+	//private String password;
 	
 
 	@Column(name = "ciu_estado") 
@@ -90,12 +83,13 @@ public class Ciudadano extends Usuario{
 	@JoinColumn(name = "ciu_curriculum")
 	private Curriculum curriculum;
 	
-	@Column(name = "ciu_tipo") 
-	private String tipo;
+	
 	
 	@OneToOne(fetch = FetchType.LAZY)
 	@PrimaryKeyJoinColumn
 	private Usuario usuario;
+	
+	
 	
 	public Ciudadano() {
 		super();
@@ -103,32 +97,23 @@ public class Ciudadano extends Usuario{
 
 
 
-	public Ciudadano(Long id,int dni, int numero_tramite,String email,String estado_civil,String provincia,Long telefono,LocalDate fecha_nac,String password, boolean estado,String tipo) 
+	public Ciudadano(Long id, int numero_tramite,String email,String estado_civil,String provincia,Long telefono,LocalDate fecha_nac, boolean estado) 
 	{
 		super();
 		this.id = id;
-		this.dni = dni;
+		//this.dni = dni;
 		this.numero_tramite = numero_tramite;
 		this.email = email;
 		this.estado_civil = estado_civil;
 		this.provincia = provincia;
 		this.telefono = telefono;
 		this.fecha_nac = fecha_nac;
-		this.password = password;
+		//this.password = password;
 		this.estado = estado;
-		this.tipo=tipo;
+		//this.tipo=tipo;
 	}
 
-	public String getTipo() {
-		return tipo;
-	}
-
-
-
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
-
+	
 
 
 	public boolean isEstado() {
@@ -146,17 +131,7 @@ public class Ciudadano extends Usuario{
 
 
 
-	public int getDni() {
-		return dni;
-	}
-
-
-
-
-
-	public void setDni(int dni) {
-		this.dni = dni;
-	}
+	
 
 
 
@@ -271,17 +246,7 @@ public class Ciudadano extends Usuario{
 
 
 
-	public String getPassword() {
-		return password;
-	}
-
-
-
-
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
+	
 
 
 
@@ -298,9 +263,9 @@ public class Ciudadano extends Usuario{
 
 	@Override
 	public String toString() {
-		return "ciudadano [dni=" + dni + ", numero_tramite=" + numero_tramite + ", email=" + email + ", estado_civil="
+		return "ciudadano [numero_tramite=" + numero_tramite + ", email=" + email + ", estado_civil="
 				+ estado_civil + ", provincia=" + provincia + ", telefono=" + telefono + ", fecha_nac=" + fecha_nac
-				+ ", contraseña=" + password + ",tipo="+tipo+ "]";
+				+ "]";
 	}
 	
 	

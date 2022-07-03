@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import ar.edu.unju.fi.entity.Empleador;
@@ -29,6 +30,11 @@ public class EmpleadorServiceImp implements IEmpleadorService {
 
 	@Override
 	public boolean saveEmpleador(Empleador empleador) {
+		
+		String pw = empleador.getPassword();
+		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(4);
+		empleador.setPassword(bCryptPasswordEncoder.encode(pw));
+		empleador.setTipo("tipoEmpleador");
 		empleadorRepository.save(empleador);
 		return true;
 	}

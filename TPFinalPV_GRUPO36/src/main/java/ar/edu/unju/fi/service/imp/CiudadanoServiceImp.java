@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import ar.edu.unju.fi.entity.Ciudadano;
@@ -22,6 +22,12 @@ public class CiudadanoServiceImp implements ICiudadanoService {
 		 * ciudadano.setEstado(true); if(ciudadanoRepository.save(ciudadano) != null) {
 		 * return true; } return false;
 		 */
+		
+
+		String pw = ciudadano.getPassword();
+		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(4);
+		ciudadano.setPassword(bCryptPasswordEncoder.encode(pw));
+		ciudadano.setTipo("tipoCiudadano");
 		ciudadanoRepository.save(ciudadano);
 		return true;
 		
@@ -47,10 +53,14 @@ public class CiudadanoServiceImp implements ICiudadanoService {
 
 	}
 
-	@Override
-	public Ciudadano buscarCiudadanoPorDni(int dni) {
-		return ciudadanoRepository.findByDni(dni);
-	}
+	//@Override
+	//public Ciudadano buscarCiudadanoPorDni(int dni) {
+	//	return ciudadanoRepository.findByDni(dni);
+	//}
+	
+	
+	
+	
 	
 	@Override
 	public void eliminarCiudadano(Long id) throws Exception {
@@ -72,5 +82,7 @@ public class CiudadanoServiceImp implements ICiudadanoService {
 	public Ciudadano buscarPorId(Long id) throws Exception {
 		return ciudadanoRepository.findById(id).orElseThrow(()-> new Exception("El ciudadano no existe") );
 	}
+
+	
 
 }
