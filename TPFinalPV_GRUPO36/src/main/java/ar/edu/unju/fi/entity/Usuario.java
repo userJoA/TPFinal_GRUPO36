@@ -5,40 +5,55 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.Table;
+
+import javax.persistence.InheritanceType;
+
+
+
+import org.springframework.stereotype.Component;
 
 
 @Entity
-public class Usuario {
+@Table(name = "usuarios")
+@Inheritance(strategy = InheritanceType.JOINED)
+@Component
+public abstract class Usuario {
+	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "ID")
+	@Column(name = "usu_id")
 	private Long id;
+	@Column(name = "usu_msg")
+private String menssge;
 	
-	@Column(name = "USUARIO")
-	private String usuario;
 	
-	@Column(name = "PASSWORD")
-	private String password;
-	
-	@Column(name = "TIPO")
-	private String perfil;
-	
+	public String getMenssge() {
+		return menssge;
+	}
+
+	public void setMenssge(String menssge) {
+		this.menssge = menssge;
+	}
+
 	public Usuario() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Usuario(Long id, String usuario, String password, String perfil) {
+	public Usuario(Long id, String usuario, String menssge) {
 		super();
 		this.id = id;
-		this.usuario = usuario;
-		this.password = password;
-		this.perfil = perfil;
+		this.menssge = menssge;
 	}
 
-	@Override
-	public String toString() {
-		return "Usuario [id=" + id + ", usuario=" + usuario + ", password=" + password + ", perfil=" + perfil + "]";
+	public Long getId() {
+		return id;
 	}
-	
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 	
 }
