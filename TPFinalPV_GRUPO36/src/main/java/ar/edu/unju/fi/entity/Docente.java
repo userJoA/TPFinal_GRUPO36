@@ -14,7 +14,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+
 import javax.validation.constraints.Size;
 
 import org.springframework.stereotype.Component;
@@ -47,9 +47,9 @@ public class Docente {
 	@Column(name = "EMAIL", nullable = true)
 	private String email;
 	
-	@NotNull(message="Debe ingresar un nro de teléfono")
-	@Column(name = "TELEFONO", nullable = true)
-	private long telefono;
+	//@NotNull(message="Debe ingresar un nro de teléfono")
+	//@Column(name = "TELEFONO", nullable = true)
+	//private long telefono;
 	
 	@OneToMany(mappedBy = "docente", cascade= CascadeType.ALL)
 	private List<Curso> cursos=new ArrayList<Curso>();
@@ -58,16 +58,15 @@ public class Docente {
 		super();
 	}
 	
-	/*public Docente(int legajo, String nombre, String apellido, String email, long telefono) {
+	public Docente(int legajo, String nombre, String apellido, String email) {
 		super();
 		this.legajo = legajo;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.email = email;
-		this.telefono = telefono;
+		//this.telefono = telefono;
 
 	}
-*/
 	public int getLegajo() {
 		return legajo;
 	}
@@ -100,13 +99,7 @@ public class Docente {
 		this.email = email;
 	}
 	
-	public long getTelefono() {
-		return telefono;
-	}
 	
-	public void setTelefono(long telefono) {
-		this.telefono = telefono;
-	}
 
 	public List<Curso> getCursos() {
 		return cursos;

@@ -70,7 +70,7 @@ public class Curso {
 	//
 	//
 	//
-	public Curso() {
+	public Curso(int i, String string, String string2, LocalDate localDate, LocalDate localDate2, int j, String string3, Docente docente1) {
 		super();
 	}
 	

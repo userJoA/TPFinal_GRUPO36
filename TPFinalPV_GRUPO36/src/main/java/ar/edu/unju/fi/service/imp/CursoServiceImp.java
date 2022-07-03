@@ -21,16 +21,22 @@ public class CursoServiceImp implements ICursoService {
 		
 	}
 
-	@Override
-	public Curso obtenerCurso() {
-		// TODO Auto-generated method stub
-		return new Curso();
-	}
+	//@Override
+	//public Curso obtenerCurso() {
+	//	// TODO Auto-generated method stub
+	//	/return new Curso();
+	//}
 
 	@Override
 	public List<Curso> obtenerCursos() {
 		// TODO Auto-generated method stub
 		return cursoRepositoryImp.obtenerCursos();
+	}
+
+	@Override
+	public Curso obtenerCurso() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 
