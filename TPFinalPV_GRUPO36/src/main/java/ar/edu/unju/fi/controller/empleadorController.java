@@ -27,6 +27,11 @@ public class empleadorController {
 	
 	private static final Log LOGGER = LogFactory.getLog(empleadorController.class);
 	
+	@GetMapping("/login")
+	public String getEmpleadorLoginPage() {
+		return "/empleador/login_empleador";
+	}
+	
 	/* LISTA */
 	@GetMapping("/lista")
 	public String getListaEmpleador(Model model) {

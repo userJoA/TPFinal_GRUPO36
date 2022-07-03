@@ -20,14 +20,16 @@
         
 	<div class="container">	
 		<main>
-			<div class="col-md-8 offset-md-2">
+			<div class="col-md-6 offset-md-3">
 			<form role="form" th:action="@{/cv/guardar}" method="post" th:object="${curriculum}" id="formCv">
 				<h3 class="text-center">Curriculum Vitae</h3>				
 
 				<div class="card traslucido text-white border-white mb-3">
 					<div class="card-header">Datos Académicos (Títulos / Carreras)</div>
 					<div class="card-body">
-						<textarea th:field="*{estudio}" class="form-control" id="txtTitulo" rows="6"></textarea>						
+						<textarea th:field="*{estudio}" class="form-control" id="txtTitulo" rows="6"></textarea>
+						<!-- mostrar el message de error asociado con la validación -->
+						<div class="text-danger" th:errors="*{estudio}"></div>					
 					</div>
 					<div class="card-footer fs-6 fst-italic">
 						MesAño(Inicio) - MesAño(Final): Nombre de carrera o de Título - Nombre de Institución - Breve descripción

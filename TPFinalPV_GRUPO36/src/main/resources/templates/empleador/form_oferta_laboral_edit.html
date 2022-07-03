@@ -22,33 +22,34 @@
         <main>
 			<div class="card traslucido text-white col-md-8 offset-md-2 p-4">
         	<form th:action="@{/anuncio/editar}" method="post" th:object="${anuncio}" id="formAnuncio">
-			  	<h3 style="padding: 10px">Modificación de Anuncio/Oferta Laboral</h3>			  	
+			  	<h3 style="padding: 10px">Modificación de Anuncio/Oferta Laboral</h3>	
+			  	<label th:field="*{idAnuncio}"></label>		  	
 			  	<div class="row mb-3">
 				    <label for="inputCod" class="col-sm-4 col-md-3 col-form-label">Puesto requerido</label>
 				    <div class="col-sm-8 col-md-9">
-				    	<input th:field="*{nombreDePuesto}" type="text" class="form-control" id="inputCod" placeholder="Nombre del puesto requerido"><!--   -->
-				    	<!-- mostrar el message de error asociado con la validación del código -->
-<!-- 				    	<div class="text-danger" th:errors="*{codigo}"></div> -->
+				    	<input th:field="*{nombreDePuesto}" type="text" class="form-control" id="inputCod" placeholder="Nombre del puesto requerido">
+				    	<!-- mostrar el message de error asociado con la validación -->
+				    	<div class="text-danger" th:errors="*{nombreDePuesto}"></div>
 				  	</div>
 				 </div>		
 				<div class="row mb-3">
 				    <label for="inputCod" class="col-sm-4 col-md-3 col-form-label">Cantidad de vacantes</label>
 				    <div class="col-sm-8 col-md-9">
-				    	<input th:field="*{vacantes}" type="number" class="form-control" id="inputCod" placeholder="Número de vacantes"><!--   -->
-<!-- 				    	<div class="text-danger" th:errors="*{codigo}"></div> -->
+				    	<input th:field="*{vacantes}" type="number" class="form-control" id="inputCod" placeholder="Número de vacantes">
+				    	<div class="text-danger" th:errors="*{vacantes}"></div>
 				  	</div>
 				 </div>
 				 <div class="row mb-3">
 				    <label for="inputCod" class="col-sm-4 col-md-3 col-form-label">Descripción del puesto</label>
 				    <div class="col-sm-8 col-md-9">
-				    	<textarea th:field="*{descripcionPuesto}" class="form-control" id="txtTitulo" rows="4" placeholder="Descripción del puesto"></textarea><!--   -->
-<!-- 				    	<div class="text-danger" th:errors="*{codigo}"></div> -->
+				    	<textarea th:field="*{descripcionPuesto}" class="form-control" id="txtTitulo" rows="4" placeholder="Descripción del puesto">
+				    	</textarea>
 				  	</div>
 				 </div>				 
 				 <div class="row mb-3">
 				    <label for="cmbCurso" class="col-sm-4 col-md-3 col-form-label">Disponibilidad horaria</label>
 				    <div class="col-sm-8 col-md-9">			    
-				    <select id="cmbCurso" class="form-select"><!-- th:field="*{curso.codigo}"  -->
+				    <select th:field="*{tiempoDisponible}" id="cmbCurso" class="form-select">
 				    	<option value="mañana">mañana</option>
 				    	<option value="tarde">tarde</option>
 				    	<option value="noche">noche</option>
@@ -65,36 +66,37 @@
 				 <div class=" row mb-3">
 				    <label for="txtFecha1" class="col-sm-4 col-md-3 col-form-label">Principales tareas</label>
 				    <div class="col-sm-8 col-md-9">
-				    	<textarea th:field="*{funciones}" class="form-control" id="txtTitulo" rows="6" placeholder="Tareas a realizar"></textarea><!--   -->
-<!-- 				    	<div class="text-danger" th:errors="*{fechaInicio}"></div> -->
+				    	<textarea th:field="*{funciones}" class="form-control" id="txtTitulo" rows="6" placeholder="Tareas a realizar">
+				    	</textarea>
+				    	<div class="text-danger" th:errors="*{funciones}"></div>
 				    </div>
 				 </div>  
 				 
 				  <div class="row mb-3">
 				    <label for="txtFecha2" class="col-sm-4 col-md-3 col-form-label">Requisitos</label>
 				    <div class="col-sm-8 col-md-9">
-				    	<textarea th:field="*{requisitos}" class="form-control" id="txtTitulo" rows="4" placeholder="Requisitos que se piden"></textarea><!--   -->				    	
-<!-- 				    	<div class="text-danger" th:errors="*{fechaCierre}"></div> -->
+				    	<textarea th:field="*{requisitos}" class="form-control" id="txtTitulo" rows="4" placeholder="Requisitos que se piden">
+				    	</textarea>	
 				    </div>
 				  </div>
 				  <div class="row mb-3">
 				    <label for="cmbEstado" class="col-sm-4 col-md-3 col-form-label">Salario</label>
 				    <div class="col-sm-8 col-md-9">		    
-				    <input th:field="*{salario}" type="number" class="form-control" id="txtFecha2" placeholder="Monto del salario a ofrecer"><!--  -->
-<!-- 				    	<div class="text-danger" th:errors="*{fechaCierre}"></div> -->
+				    <input th:field="*{salario}" type="number" class="form-control" id="txtFecha2" placeholder="Monto del salario a ofrecer">
+				    	<div class="text-danger" th:errors="*{salario}"></div>
 				    </div>
 				 </div>
 				 <div class="row mb-3">
 				    <label for="cmbEstado" class="col-sm-4 col-md-3 col-form-label">Beneficios</label>
 				    <div class="col-sm-8 col-md-9">
-				    	<textarea th:field="*{beneficios}" class="form-control" id="txtTitulo" rows="4" placeholder="Beneficios que se ofrecen"></textarea><!--   -->			    
-<!-- 				    	<div class="text-danger" th:errors="*{fechaCierre}"></div> -->
+				    	<textarea th:field="*{beneficios}" class="form-control" id="txtTitulo" rows="4" placeholder="Beneficios que se ofrecen">
+				    	</textarea>
 				    </div>
 				 </div>
 	
 				<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-					<button class="btn btn-primary me-md-2" type="submit">Guardar Cambios</button>
-					<button class="btn btn-secondary" type="reset">Cancelar</button>
+					<button type="submit" class="btn btn-primary me-md-2">Guardar Cambios</button>
+					<a th:href="@{/anuncio/lista}" class="btn btn-secondary">Cancelar</a>
 				</div>
 			</form>
 			</div><!-- fin card -->
