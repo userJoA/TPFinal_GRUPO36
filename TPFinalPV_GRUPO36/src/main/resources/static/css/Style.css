@@ -1,1 +1,53 @@
 @charset "ISO-8859-1";
+
+#cabecera {
+	max-width: 100%;
+	height: auto;
+	padding: 28px;	
+}
+
+#imglogo{
+	width:100px;
+}
+
+main{
+	margin-top:80px;
+	margin-bottom:80px;
+}
+
+#principal{
+	background-image: url("../images/trabajador.jpg");
+	background-repeat:no-repeat;
+	background-size:cover;
+	min-height: 100vh
+}
+
+.traslucido{
+	background: rgba(0,0,0,0.8)
+}
+
+#loginCiudadano{
+	background-image: url("../images/trabajador2.jpg");
+	background-repeat:no-repeat;
+	background-size:cover;
+	min-height: 100vh
+}
+
+#loginEmpresa{
+	background-image: url("../images/empresas2.jpg");
+	background-repeat:no-repeat;
+	background-size:cover;
+	min-height: 100vh
+}
+
+.fondo{
+	background-image: url("../images/fondoempr.jpg");
+	background-repeat:no-repeat;
+	background-size:cover;
+}
+
+.fondoCiud{
+	background-image: url("../images/fondociud.jpg");
+	background-repeat:no-repeat;
+	background-size:cover;
+}

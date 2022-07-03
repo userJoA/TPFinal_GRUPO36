@@ -22,8 +22,8 @@ public class CurriculumServiceImp implements ICurriculumService{
 	}
 	
 	@Override
-	public boolean guardarCv(Curriculum cv) {
-		if(cvRepository.save(cv) != null)
+	public boolean guardarCv(Curriculum curriculum) {
+		if(cvRepository.save(curriculum) != null)
 			return true;
 		else
 			return false;

@@ -5,10 +5,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.springframework.stereotype.Component;
 
 @Entity
 @Table(name = "anuncios")
+@Component
 public class Anuncio {
 	
 	@Id
@@ -34,6 +39,9 @@ public class Anuncio {
 	@Column(name= "anu_salario")
 	private Double salario;
 	
+	@Column(name ="anu_requisitos")
+	private String requisitos;
+	
 	@Column(name = "anu_beneficios")
 	private String beneficios;
 	
@@ -42,12 +50,17 @@ public class Anuncio {
 	
 	@Column(name = "anu_estado")
 	private boolean estado;
+	
+	@ManyToOne
+	@JoinColumn(name = "Emp_ID")
+	private Empleador empleador;
+	
 	//private Contacto contacto;
 	//private String jornada;
 	
 	
 	public Anuncio() {
-		
+		super();
 	}
 	
 	
@@ -107,6 +120,16 @@ public class Anuncio {
 		this.salario = salario;
 	}
 	
+	public String getRequisitos() {
+		return requisitos;
+	}
+
+
+	public void setRequisitos(String requisitos) {
+		this.requisitos = requisitos;
+	}
+
+
 	public String getBeneficios() {
 		return beneficios;
 	}
@@ -115,7 +138,7 @@ public class Anuncio {
 		this.beneficios = beneficios;
 	}
 	
-	public boolean isDisponible() {
+	public boolean getDisponible() {
 		return disponible;
 	}
 	
@@ -123,12 +146,24 @@ public class Anuncio {
 		this.disponible = disponible;
 	}
 	
-	public boolean isEstado() {
+	public boolean getEstado() {
 		return estado;
 	}
 	
 	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
+
+
+	public Empleador getEmpleador() {
+		return empleador;
+	}
+
+
+	public void setEmpleador(Empleador empleador) {
+		this.empleador = empleador;
+	}
+	
+	
 	
 }

@@ -4,13 +4,14 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import ar.edu.unju.fi.entity.Empleador;
 import ar.edu.unju.fi.repository.IEmpleadorRepository;
 import ar.edu.unju.fi.service.IEmpleadorService;
 
-@Service
+@Service("EmpleadorService")
 public class EmpleadorServiceImp implements IEmpleadorService {
 	
 	@Autowired
@@ -29,14 +30,16 @@ public class EmpleadorServiceImp implements IEmpleadorService {
 
 	@Override
 	public boolean saveEmpleador(Empleador empleador) {
+		
+		String pw = empleador.getPassword();
+		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(4);
+		empleador.setPassword(bCryptPasswordEncoder.encode(pw));
+		empleador.setTipo("tipoEmpleador");
 		empleadorRepository.save(empleador);
 		return true;
 	}
 
-	@Override
-	public void modificarEmpleador(Empleador empleador) {
-		empleadorRepository.save(empleador);
-	}
+	
 
 	@Override
 	public void eliminarEmpleador(Long id) {
@@ -44,9 +47,24 @@ public class EmpleadorServiceImp implements IEmpleadorService {
 	}
 
 	@Override
-	public Empleador buscarPorId(Long id) {
-		Optional<Empleador> e= empleadorRepository.findById(id);
-		return e.get();
+	public Empleador buscarPorId(Long id) throws Exception {
+		return empleadorRepository.findById(id).orElseThrow(()-> new Exception("El Empleador no existe") );
+	}
+
+	@Override
+	public Empleador modificarEmpleador(Empleador empleador) throws Exception{
+
+		  Empleador emp= buscarPorId(empleador.getId());
+		  emp.setDescripcion(empleador.getDescripcion());
+		  emp.setDireccion(empleador.getDireccion());
+		  emp.setEmail(empleador.getEmail()); 
+		  emp.setPagina(empleador.getPagina());
+		  emp.setInicio(empleador.getInicio());
+		  emp.setNombre_comercial(empleador.getNombre_comercial());
+		  emp.setProvincia(empleador.getProvincia());
+		  emp.setTelefono(empleador.getTelefono());
+		  emp.setRazon_social(empleador.getRazon_social());
+		return empleadorRepository.save(emp);
 	}
 	
 	

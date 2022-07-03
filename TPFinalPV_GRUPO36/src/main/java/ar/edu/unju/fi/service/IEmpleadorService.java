@@ -14,9 +14,9 @@ public interface IEmpleadorService {
 	public Empleador getEmpleador();
 	public List<Empleador> listaEmpleador();
 	public boolean saveEmpleador(Empleador empleador);
-	public void modificarEmpleador(Empleador empleador);
+	public Empleador modificarEmpleador(Empleador empleador) throws Exception;
 	public void eliminarEmpleador(Long id);
-	public Empleador buscarPorId(Long id);
+	public Empleador buscarPorId(Long id) throws Exception;
 	
 	
 	

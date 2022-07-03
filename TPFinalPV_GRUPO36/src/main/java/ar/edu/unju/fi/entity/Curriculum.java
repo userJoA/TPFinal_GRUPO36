@@ -18,8 +18,8 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
-@Component
 @Entity
+@Component
 @Table(name = "curriculums")
 public class Curriculum {
 	
@@ -63,6 +63,12 @@ public class Curriculum {
 		super();
 	}
 	
+	/**
+	 * Procedimiento que fija fecha de creación del Curriculum
+	 */
+	public void fecharCreacionCV() {
+		this.fechaRealizacion = LocalDate.now();
+	}
 	
 	public Long getIdCV() {
 		return idCV;

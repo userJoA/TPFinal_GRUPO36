@@ -2,15 +2,21 @@
 <html lang='es' xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
-
+<link rel="shortcut icon" th:href="@{/images/iconoCV.png}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/Style.css}">
 </head>
 <body>
-	<header >
-		<div class="encabezado bg-light" id="cabecera">
-		<a class="navbar-brand text-dark" href="/">
-			<p class="text-center text-white">TP Final</p>
-		</a>
-	  	</div>   
+	<header id="cabecera" class="bg-dark">	
+		<div class="row">
+			<div class="col-2">		
+			<img src="../images/logoCV.png" class="rounded float-start" id="imglogo">
+			</div>
+			<div class="col-10 align-content-middle">
+			<h2 class="text-center text-white align-content-middle">		
+				CV Net
+			</h2>
+			</div>
+		</div>		  	  
 	</header>
 </body>
 </html> 

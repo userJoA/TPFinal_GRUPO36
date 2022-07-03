@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -8,19 +8,46 @@
     <title>Opciones de Ciudadano</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <!--<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}" />
-<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">-->
+    <!--<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}" />-->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/Style.css}">
 </head>
 
-<body>
-    <div class="container">
-        <header th:replace="layouts/header :: header"></header>
-        <nav th:replace="layouts/nav :: nav"></nav>
+<body class="fondoCiud">
+
+	<header th:replace="layouts/header :: header"></header>
+    <nav th:replace="layouts/nav :: nav"></nav>
+        
+    <div class="container">        
         <main>
-
-        </main>
-        <footer th:replace="layouts/footer :: footer"></footer>
+			<div class="card" th:object="${curriculum}">
+				<div class="card-header">
+					Curriculum Vitae
+				</div>
+				<div class="card-body">
+					<h5 class="card-title">Datos Personales</h5>
+					<p class="card-text"></p>
+					<hr>
+					<h5 class="card-title">Estudios / Títulos</h5>
+					<p class="card-text" th:text="*{estudio}"></p>
+					<hr>
+					<h5 class="card-title">Experiencia Laboral</h5>
+					<p class="card-text" th:text="*{experienciaLaboral}"></p>
+					<hr>
+					<h5 class="card-title">Cursos</h5>
+					<p class="card-text" th:text="*{curso}"></p>
+					<hr>
+					<h5 class="card-title">Conocimientos</h5>
+					<p class="card-text" th:text="*{conocimiento}"></p>
+					<hr>
+					<h5 class="card-title">Carta de Presentación</h5>
+					<p class="card-text" th:text="*{presentacion}"></p>
+					<br>
+				</div>
+			</div>
+        </main>        
     </div>
+    
+    <footer th:replace="layouts/footer :: footer"></footer>
+    
 </body>
-
 </html>
