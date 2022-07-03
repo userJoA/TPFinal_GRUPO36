@@ -36,7 +36,7 @@ public class AnuncioController {
 	public ModelAndView agregarAnuncio(@Validated @ModelAttribute("anuncio") Anuncio anuncio, BindingResult bindingResult) {
 		if(bindingResult.hasErrors()) {
 			LOGGER.error("No se cumplen las reglas de validación");
-			ModelAndView mav = new ModelAndView("/empleador/form_oferta_laboral_alta");
+			ModelAndView mav = new ModelAndView("/empleador/form_oferta_laboral_alta");//
 			mav.addObject("anuncio", anuncio);
 			return mav;
 		}
@@ -69,18 +69,6 @@ public class AnuncioController {
 		return "/empleador/form_oferta_laboral_edit";
 	}
 	
-//	@PostMapping("/editar")
-//	public String modificarAnuncio(@Validated @ModelAttribute("anuncio") Anuncio anuncio, Model model, BindingResult result) throws Exception {
-//		if(result.hasErrors()) {
-//			model.addAttribute("anuncio", anuncio);
-//		} else {
-//			this.anuncioService.modificarAnuncio(anuncio);
-//			LOGGER.info("se modificó anuncio");			
-//			model.addAttribute("ofertas", this.anuncioService.listarAnuncio());
-//		}		
-//		return "/empleador/lista_ofertas_laborales";
-//	}
-	
 	@PostMapping("/editar")
 	public ModelAndView modificarAnuncio(@Validated @ModelAttribute("anuncio") Anuncio anuncio, BindingResult result) throws Exception {
 		if(result.hasErrors()) {
@@ -90,8 +78,8 @@ public class AnuncioController {
 			return mav;
 		}
 		ModelAndView mav = new ModelAndView("redirect:/anuncio/lista");
-		this.anuncioService.modificarAnuncio(anuncio);
 		LOGGER.info("Se modificó anuncio: "+anuncio.getIdAnuncio());
+		this.anuncioService.modificarAnuncio(anuncio);		
 		mav.addObject("ofertas", this.anuncioService.listarAnuncio());
 		return mav;
 	}

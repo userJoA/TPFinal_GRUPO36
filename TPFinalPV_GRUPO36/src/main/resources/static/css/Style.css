@@ -22,8 +22,12 @@ main{
 	min-height: 100vh
 }
 
-.traslucido{
+.traslucido1{
 	background: rgba(0,0,0,0.8)
+}
+
+.traslucido{
+	background: rgba(0,0,0,0.6)
 }
 
 #loginCiudadano{
@@ -50,4 +54,8 @@ main{
 	background-image: url("../images/fondociud.jpg");
 	background-repeat:no-repeat;
 	background-size:cover;
+}
+
+.blancoTrans{
+	background: rgba(255,255,255,0.8)
 }

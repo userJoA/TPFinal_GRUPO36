@@ -8,7 +8,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
 
+import org.springframework.format.annotation.NumberFormat;
 import org.springframework.stereotype.Component;
 
 @Entity
@@ -21,9 +25,11 @@ public class Anuncio {
 	@Column(name = "anu_id")
 	private Long idAnuncio;
 	
+	@Positive(message = "Ingrese mayor o igual 1")
 	@Column(name = "anu_vacante")
 	private int vacantes;
 	
+	@NotBlank(message = "Ingrese nombre del puesto")
 	@Column(name = "anu_nombre_puesto")
 	private String nombreDePuesto;
 	
@@ -33,9 +39,11 @@ public class Anuncio {
 	@Column(name = "anu_tiempoDisponible")
 	private String tiempoDisponible;
 	
+	@NotBlank(message = "Ingrese, al menos, una función")
 	@Column(name = "anu_funcion")
 	private String funciones;
 	
+	@Min(value = 10000,message = "El salario debe ser mayor a 10000")
 	@Column(name= "anu_salario")
 	private Double salario;
 	
