@@ -14,7 +14,7 @@ import ar.edu.unju.fi.service.imp.LoginCiudadanoServiceImp;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
-	private AutenticacionSuccessHandler autenticacion;
+	private AuthenticacionSuccessHandler autenticacion;
 	
 	String[] resources = new String[]{
             "/include/**","/css/**","/icons/**","/img/**","/js/**","/layer/**","/webjars/**"
