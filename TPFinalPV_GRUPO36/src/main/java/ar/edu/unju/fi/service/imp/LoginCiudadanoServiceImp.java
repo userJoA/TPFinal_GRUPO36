@@ -22,16 +22,16 @@ private IUsuarioRepository iUsuario;
 
 
 	@Override
-	public UserDetails loadUserByUsername(String dni) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
 		
-			Usuario ciudadanoEncontrado = iUsuario.findByDni(Long.parseLong(dni)).orElseThrow(()-> new UsernameNotFoundException("Login invalido"));
+			Usuario ciudadanoEncontrado = iUsuario.findByName(Long.parseLong(name)).orElseThrow(()-> new UsernameNotFoundException("Login invalido"));
 			
 			List<GrantedAuthority> tipos = new ArrayList<>();
 			GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(ciudadanoEncontrado.getTipo()); 
 			tipos.add(grantedAuthority);
 			
-			UserDetails user =( UserDetails) new User (dni, ciudadanoEncontrado.getPassword(),tipos);
+			UserDetails user =( UserDetails) new User (name, ciudadanoEncontrado.getPassword(),tipos);
 			
 			return user;
 		

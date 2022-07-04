@@ -22,7 +22,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Positive;
-
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
@@ -41,15 +41,16 @@ public class Empleador extends Usuario{
 	@Column(name ="id_emp")
 	private Long id;
 	
-	//@Positive(message = "El cuit debe ser un numero valido")
+	@Positive(message = "El cuit debe ser un numero valido")
      
-	//@Column(name = "emp_cuit", nullable = false)
-	//private Long cuit;
+	@Column(name = "emp_cuit", nullable = false)
+	private Long cuit;
 	
 	//@NotEmpty(message="Este campo no puede estar vacio")
 	//@Size(min=8,message = "la contraseña debe tener como minimo 8 caracteres") 
 	//@Column(name = "emp_password")
 	//private String password;
+	
 	
 	@NotEmpty(message="Este campo no puede estar vacio")
 	@Column(name = "emp_razonSocial")
@@ -372,13 +373,52 @@ public class Empleador extends Usuario{
 
 	@Override
 	public String toString() {
-		return "Empleador [id=" + id  + ", razon_social=" + razon_social
+		return "Empleador [id=" + id  +"cuit="+cuit +", razon_social=" + razon_social
 				+ ", nombre_comercial=" + nombre_comercial + ", inicio=" + inicio + ", email=" + email + ", telefono="
 				+ telefono + ", direccion=" + direccion + ", provincia=" + provincia + ", pagina=" + pagina
 				+ ", descripcion=" + descripcion + ", estado=" + estado + "]";
 	}
 
 	
+
+	public Empleador(Long id,
+			@NotEmpty(message = "Este campo no puede estar vacio") @Size(min = 8, message = "la contraseña debe tener como minimo 8 caracteres") String password,
+			String tipo, Long name) {
+		super(id, password, tipo, name);
+		// TODO Auto-generated constructor stub
+	}
+
+
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+
+
+	public Long getCuit() {
+		return cuit;
+	}
+
+
+
+	public void setCuit(Long cuit) {
+		this.cuit = cuit;
+	}
+
+
+
+
+
+
+
+
 
 
 
