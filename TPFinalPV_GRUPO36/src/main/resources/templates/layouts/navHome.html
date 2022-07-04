@@ -1,25 +1,22 @@
 <!DOCTYPE html>
 <html lang='es' xmlns:th="http://www.thymeleaf.org">	
 <body >
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark" th:fragment="navHome">
 		<div class="container-fluid">
-		    <a class="navbar-brand" href="#">Empleador</a>
+		    <a class="navbar-brand" href="#">-</a>
 		    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 		      <span class="navbar-toggler-icon"></span>
 		    </button>
 		    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
 		      <ul class="navbar-nav align-items-center">		        
 		        <li class="nav-item">
-		          <a class="nav-link" href="#">Postulantes</a>
+		          <a class="nav-link" th:href="@{/login}">login</a>
 		        </li>
 		        <li class="nav-item">
-		          <a class="nav-link" th:href="@{/empleador/altaAnuncio}">Crear Anuncio</a>
+		          <a class="nav-link" th:href="@{/alta/ciudadano}">Regitro Ciudadano</a>
 		        </li>
 		        <li class="nav-item">
-		          <a class="nav-link" th:href="@{/anuncio/lista}">Ver Anuncios</a>
-		        </li>
-		        <li class="nav-item">
-		          <a class="nav-link" th:href="@{/anuncio/lista}">Editar Perfil</a>
+		          <a class="nav-link" th:href="@{/alta/empleador}">Registro empleador</a>
 		        </li>		
 		      </ul>
 		    </div>

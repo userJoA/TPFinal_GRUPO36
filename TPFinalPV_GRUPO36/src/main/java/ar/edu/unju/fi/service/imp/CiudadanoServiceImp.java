@@ -14,7 +14,7 @@ import ar.edu.unju.fi.service.ICiudadanoService;
 public class CiudadanoServiceImp implements ICiudadanoService {
 
 	@Autowired
-	ICiudadanoRepository ciudadanoRepository;
+	private ICiudadanoRepository ciudadanoRepository;
 	
 	@Override
 	public boolean guardarCiudadano(Ciudadano ciudadano) {
@@ -83,6 +83,14 @@ public class CiudadanoServiceImp implements ICiudadanoService {
 	public Ciudadano buscarPorId(Long id) throws Exception {
 		return ciudadanoRepository.findById(id).orElseThrow(()-> new Exception("El ciudadano no existe") );
 	}
+
+	@Override
+	public Ciudadano buscarPorDni(Long dni) throws Exception {
+		
+		return ciudadanoRepository.findByDni(dni).orElseThrow(()-> new Exception("El ciudadano no existe") );
+	}
+
+	
 
 	
 

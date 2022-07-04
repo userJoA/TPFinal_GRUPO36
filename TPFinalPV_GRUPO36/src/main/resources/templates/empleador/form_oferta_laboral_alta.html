@@ -21,7 +21,7 @@
     <div class="container">       
         <main>
         	<div class="card traslucido text-white col-md-8 offset-md-2 p-4">
-        	<form th:action="@{/anuncio/formulario}" method="post" th:object="${anuncio}" id="formAnuncio">
+        	<form th:action="@{/anuncio/formulario/}+${empleador.id}" method="post" th:object="${anuncio}" id="formAnuncio">
 			  	<h3 style="padding: 10px">Formulario de Nueva Oferta Laboral</h3>
 			  	
 			  	<div class="row mb-3">

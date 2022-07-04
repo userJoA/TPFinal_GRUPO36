@@ -14,7 +14,7 @@
 
 <body>
 	<header th:replace ="layouts/header :: header"></header>
-	<nav th:replace ="layouts/nav :: nav"></nav>
+	<nav th:replace ="layouts/navHome :: navHome"></nav>
 	<h1>home</h1>
 	
 	<form class="form" th:object="${usuarioDelForm}" th:action="@{/login}"

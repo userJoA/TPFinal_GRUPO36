@@ -1,7 +1,7 @@
 package ar.edu.unju.fi.service.imp;
 
 import java.util.List;
-import java.util.Optional;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -66,6 +66,11 @@ public class EmpleadorServiceImp implements IEmpleadorService {
 		  emp.setTelefono(empleador.getTelefono());
 		  emp.setRazon_social(empleador.getRazon_social());
 		return empleadorRepository.save(emp);
+	}
+
+	@Override
+	public Empleador buscarPorDni(Long cuit) throws Exception {
+		return empleadorRepository.findByDni(cuit).orElseThrow(()-> new Exception("El Empleador no existe") );
 	}
 	
 	
