@@ -18,10 +18,10 @@ public interface IEmpleadorRepository extends JpaRepository<Empleador,Long>{
 
 	
 	
-	public Optional<Empleador> findByDni(Long cuit);
+	public Optional<Empleador> findByCuit(Long cuit);
 	
 
 //	public Empleador findByCuit(Long cuit);
 
-	//public Optional<Empleador> findByCuit(Long cuit);
+//public Optional<Empleador> findByCuit(Long cuit);
 }
