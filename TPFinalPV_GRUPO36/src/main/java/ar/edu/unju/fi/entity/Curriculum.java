@@ -32,7 +32,11 @@ public class Curriculum {
 	@Column(name = "cv_fecha_realizacion")
 	private LocalDate fechaRealizacion;
 	
-	@OneToOne(mappedBy = "curriculum", fetch = FetchType.LAZY)
+	//@OneToOne(mappedBy = "curriculum", fetch = FetchType.LAZY)
+	//private Ciudadano ciudadano;
+	
+	@OneToOne
+	@JoinColumn(name = "CIU_ID")
 	private Ciudadano ciudadano;
 	
 	//esto va en ciudadano

@@ -21,7 +21,7 @@
 	<div class="container">	
 		<main>
 			<div class="col-md-6 offset-md-3">
-			<form role="form" th:action="@{/cv/guardar}" method="post" th:object="${curriculum}" id="formCv">
+			<form role="form" th:action="@{/cv/guardar/} + ${ciudadano.id}" method="post" th:object="${curriculum}" id="formCv">
 				<h3 class="text-center">Curriculum Vitae</h3>				
 
 				<div class="card traslucido text-white border-white mb-3">
@@ -79,7 +79,8 @@
 				</div>
 					
 			</form>
-			
+			<a  th:href="@{/cv/guardar/}+ ${ciudadano.id}" 
+							 class="btn btn-danger" style="padding-left:15px; padding-right: 15px;">Votar</a>
 			</div>
 		</main>		
 	</div>

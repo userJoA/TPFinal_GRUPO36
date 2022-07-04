@@ -20,6 +20,8 @@ public interface ICiudadanoService {
 	
 	public Ciudadano buscarPorId(Long id) throws Exception;
 	
+	public Ciudadano buscarPorDni(Long dni) throws Exception;
+	
 	
 	
 	

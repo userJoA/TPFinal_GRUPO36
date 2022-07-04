@@ -15,11 +15,11 @@
 <body class="fondoCiud">
 
 	<header th:replace="layouts/header :: header"></header>
-    <nav th:replace="layouts/nav :: nav"></nav>
+<!--     <nav th:replace="layouts/nav :: nav"></nav> -->
         
     <div class="container">        
         <main>
-			<div class="card blancoTrans" th:object="${curriculum}">
+			<div class="card blancoTrans" >
 				<div class="card-header text-center">
 					<h4>Curriculum Vitae</h4>
 				</div>
@@ -28,22 +28,26 @@
 					<p class="card-text"></p>
 					<hr>
 					<h5 class="card-title">Estudios / Títulos</h5>
-					<p class="card-text" th:text="*{estudio}"></p>
+					<p class="card-text" th:text="${curriculum.estudio}"></p>
 					<hr>
 					<h5 class="card-title">Experiencia Laboral</h5>
-					<p class="card-text" th:text="*{experienciaLaboral}"></p>
+					<p class="card-text" th:text="${curriculum.experienciaLaboral}"></p>
 					<hr>
 					<h5 class="card-title">Cursos</h5>
-					<p class="card-text" th:text="*{curso}"></p>
+					<p class="card-text" th:text="${curriculum.curso}"></p>
 					<hr>
 					<h5 class="card-title">Conocimientos</h5>
-					<p class="card-text" th:text="*{conocimiento}"></p>
+					<p class="card-text" th:text="${curriculum.conocimiento}"></p>
 					<hr>
 					<h5 class="card-title">Carta de Presentación</h5>
-					<p class="card-text" th:text="*{presentacion}"></p>
+					<p class="card-text" th:text="${curriculum.presentacion}"></p>
 					<br>
 				</div>
+				<div class="card-body" style="text-align: center;">
+				   <a th:href="@{/ciudadano/inicio}" class="btn btn-dark" style="padding: 15px;">VOLVER</a>
+		    	</div>
 			</div>
+			
         </main>        
     </div>
     

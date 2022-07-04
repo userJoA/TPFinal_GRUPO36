@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.entity.Anuncio;
+import ar.edu.unju.fi.entity.Empleador;
 import ar.edu.unju.fi.service.IAnuncioService;
+import ar.edu.unju.fi.service.IEmpleadorService;
 
 @Controller
 @RequestMapping("/anuncio")
@@ -24,7 +26,10 @@ public class AnuncioController {
 	private static final Log LOGGER = LogFactory.getLog(AnuncioController.class);
 	
 	@Autowired
-	IAnuncioService anuncioService;
+	private IAnuncioService anuncioService;
+
+	@Autowired
+	private IEmpleadorService empleadorService; 
 	
 	@GetMapping("/nuevo")
 	public String getFormOferta(Model model) {
@@ -47,6 +52,30 @@ public class AnuncioController {
 		LOGGER.info("Redirigiendo a lista de ofertas");
 		return mav;
 	}
+	
+	
+	
+	@PostMapping("/formulario/{id}")
+	public ModelAndView agregarAnuncio_empleador(@PathVariable("id") Long id,  @ModelAttribute("anuncio") Anuncio anuncio,@Validated BindingResult bindingResult) throws Exception {
+		if(bindingResult.hasErrors()) {
+			LOGGER.error("No se cumplen las reglas de validación");
+			ModelAndView mav = new ModelAndView("/empleador/form_oferta_laboral_alta");//
+			mav.addObject("anuncio", anuncio);
+			return mav;
+		}
+		Empleador emp= empleadorService.buscarPorId(id);
+		anuncio.setEmpleador(emp);
+		anuncioService.guardarAnuncio(anuncio);
+		LOGGER.info("se agrego un nuevo anuncio");
+		ModelAndView mav = new ModelAndView("/layouts/nuevoAnuncio");
+		mav.addObject("ofertas", anuncioService.listarAnuncio());
+		LOGGER.info("Redirigiendo a lista de ofertas");
+		return mav;
+	}
+	
+	
+	
+	
 	
 	@GetMapping("/lista")
 	public String getListaOfertasPage(Model model) {
