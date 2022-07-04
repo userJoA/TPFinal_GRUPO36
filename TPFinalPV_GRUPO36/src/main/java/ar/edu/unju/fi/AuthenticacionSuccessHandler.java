@@ -45,10 +45,10 @@ public class AuthenticacionSuccessHandler implements AuthenticationSuccessHandle
 			redirectStrategy.sendRedirect(request, response, "/");
 		} else {
 			if (tipoEmpleador) {
-				redirectStrategy.sendRedirect(request, response, "/empleador/lista");
+				redirectStrategy.sendRedirect(request, response, "/empleador/inicio");
 		} else {
 			if (tipoCiudadano) {
-				redirectStrategy.sendRedirect(request, response, "/ciudadano/lista");
+				redirectStrategy.sendRedirect(request, response, "/ciudadano/inicio");
 			} else {
 				throw new IllegalStateException();	
 			}

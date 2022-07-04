@@ -3,6 +3,9 @@ package ar.edu.unju.fi.controller;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,90 +17,139 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import ar.edu.unju.fi.entity.Ciudadano;
 
+
+import ar.edu.unju.fi.entity.Ciudadano;
+import ar.edu.unju.fi.entity.Curriculum;
 import ar.edu.unju.fi.service.ICiudadanoService;
+import ar.edu.unju.fi.service.ICurriculumService;
 
 @RequestMapping("/ciudadano")
 @Controller
 public class ciudadanoController {
+
+	@Autowired
+	private ICiudadanoService ciudadanoService;
 	
 	@Autowired
-	ICiudadanoService ciudadanoService;
-	
+	private ICurriculumService curriculumService;
+
+
 	private static final Log LOGGER = LogFactory.getLog(ciudadanoController.class);
-	
+
 	@GetMapping("/login")
 	public String getCiudadanoLoginPage() {
 		return "/ciudadano/login_ciudadano";
 	}
-	
+
 	@GetMapping("/lista")
 	public String getListaCiu(Model model) {
 		model.addAttribute("ciudadanos", ciudadanoService.listaCiudadano());
 		return "/ciudadano/lista_ciudadano";
 	}
-	
+
 	/* AGREGAR CIUDADANO */
-	
+
 	@GetMapping("/formulario")
 	public String getForm(Model model) {
-		model.addAttribute("ciudadano",ciudadanoService.obtenerCiudadano());
-		model.addAttribute("ciudadanos",ciudadanoService.listaCiudadano());
+		model.addAttribute("ciudadano", ciudadanoService.obtenerCiudadano());
+		model.addAttribute("ciudadanos", ciudadanoService.listaCiudadano());
 		return "/ciudadano/form_ciudadano_alta";
 	}
-	
+
 	@PostMapping("/formulario")
-	public ModelAndView agregarCiudadano(@Validated @ModelAttribute ("ciudadano") Ciudadano ciudadano,BindingResult bindingResult) {
-		
-			if(bindingResult.hasErrors()) {
-				LOGGER.error("No se cumplen las reglas de validación");
-				ModelAndView mav = new ModelAndView("/ciudadano/form_ciudadano_alta");
-				mav.addObject("ciudadano", ciudadano);
-				return mav;
-			}
-		
-			ciudadanoService.guardarCiudadano(ciudadano);
-			LOGGER.info("se agrego un nuevo ciudadano");
-			ModelAndView mav= new ModelAndView("/ciudadano/lista_ciudadano");
-			mav.addObject("ciudadanos",ciudadanoService.listaCiudadano());
-			LOGGER.info("Redirigiendo a lista de ciudadanos");
+	public ModelAndView agregarCiudadano(@Validated @ModelAttribute("ciudadano") Ciudadano ciudadano,
+			BindingResult bindingResult) {
+
+		if (bindingResult.hasErrors()) {
+			LOGGER.error("No se cumplen las reglas de validación");
+			ModelAndView mav = new ModelAndView("/ciudadano/form_ciudadano_alta");
+			mav.addObject("ciudadano", ciudadano);
 			return mav;
+		}
+
+		ciudadanoService.guardarCiudadano(ciudadano);
+		LOGGER.info("se agrego un nuevo ciudadano");
+		ModelAndView mav = new ModelAndView("/ciudadano/lista_ciudadano");
+		mav.addObject("ciudadanos", ciudadanoService.listaCiudadano());
+		LOGGER.info("Redirigiendo a lista de ciudadanos");
+		return mav;
 	}
-	
+
 	/* MODIFICAR CIUDADANO */
-	
+
 	@GetMapping("/modificar/{id}")
-	public String obtenerFormularioParaEditar(Model model, @PathVariable ("id") Long id) throws Exception  {
+	public String obtenerFormularioParaEditar(Model model, @PathVariable("id") Long id) throws Exception {
 		Ciudadano ciudadanoEdit = ciudadanoService.buscarPorId(id);
 		model.addAttribute("ciudadano", ciudadanoEdit);
 		return "/ciudadano/form_ciudadano_edit";
 	}
-	
+
 	@PostMapping("/modificar")
-	public String modificarCiudadano(@Validated @ModelAttribute("ciudadano") Ciudadano ciudadano,Model model, BindingResult result) throws Exception {
-		if(result.hasErrors()) {
+	public String modificarCiudadano(@Validated @ModelAttribute("ciudadano") Ciudadano ciudadano, Model model,
+			BindingResult result) throws Exception {
+		if (result.hasErrors()) {
 			model.addAttribute("ciudadano", ciudadano);
-		}
-		else {
+		} else {
 			ciudadanoService.modificarCiudadano(ciudadano);
 			LOGGER.info("se ha modificado un ciudadano de la lista");
-			model.addAttribute("ciudadanos", ciudadanoService.listaCiudadano());	
+			model.addAttribute("ciudadanos", ciudadanoService.listaCiudadano());
 		}
-		
+
 		return "/ciudadano/lista_ciudadano";
 	}
-	
+
 	/* ELIMINAR */
-	
+
 	@GetMapping("/eliminar/{id}")
-	public String eliminarCiudadano(@PathVariable ("id") Long id, Model model) throws Exception {
+	public String eliminarCiudadano(@PathVariable("id") Long id, Model model) throws Exception {
 		ciudadanoService.eliminarCiudadano(id);
 		LOGGER.info("se ha eliminado un ciudadano de la lista");
-		model.addAttribute("ciudadanos",ciudadanoService.listaCiudadano());
+		model.addAttribute("ciudadanos", ciudadanoService.listaCiudadano());
 		return "/ciudadano/lista_ciudadano";
-		
+
 	}
+
 	
-	
+	/* INICIO CIUDADANO */
+	  
+	  @GetMapping("/inicio") 
+	  public ModelAndView obtenerPaginaInicioCiudadano(@AuthenticationPrincipal User user) throws Exception{
+		  ModelAndView mav=new ModelAndView("ciudadano/login_ciudadano"); 
+		  Ciudadano ciudadano= ciudadanoService.buscarPorDni(Long.parseLong(user.getUsername()));
+		  LOGGER.info("login: " + ciudadano.getEmail());
+			  mav.addObject("ciudadano",ciudadano);
+		  return mav; 
+	  }
+	  
+	/*CREAR CV*/
+	  @GetMapping("/altaCV")
+	  public ModelAndView crearCV(@AuthenticationPrincipal User user) throws Exception {
+		  ModelAndView mav=new ModelAndView("ciudadano/cv_ciudadano");
+		  Ciudadano ciudadano= ciudadanoService.obtenerCiudadano();
+		  ciudadano=ciudadanoService.buscarPorDni(Long.parseLong(user.getUsername()));
+		  Curriculum cv= curriculumService.getCv();
+		  mav.addObject("curriculum", cv);
+		  mav.addObject("ciudadano", ciudadano);
+		  return mav;
+	  }
+	  
+	  /*VER CV*/
+	  @GetMapping("/verCV")
+	  public ModelAndView verCV(@AuthenticationPrincipal User user) throws Exception {
+		  Ciudadano ciudadano= ciudadanoService.obtenerCiudadano();
+		  ciudadano=ciudadanoService.buscarPorDni(Long.parseLong(user.getUsername()));
+		  ModelAndView mav=new ModelAndView("ciudadano/portal_ciudadano");
+		  Curriculum cv =new Curriculum();
+		  cv=ciudadano.getCurriculum();
+		  LOGGER.info(cv.getCurso());
+		  mav.addObject("curriculum", cv);
+		  return mav;
+		  
+	  }
+	  
+	  
+	  
+	 
+
 }

@@ -79,8 +79,10 @@ public class Ciudadano extends Usuario{
 	@Column(name = "ciu_estado") 
 	private boolean estado;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "ciu_curriculum")
+	//@OneToOne(cascade = CascadeType.ALL)
+	//@JoinColumn(name = "ciu_curriculum")
+	//private Curriculum curriculum;
+	@OneToOne(mappedBy = "ciudadano", cascade = CascadeType.ALL)
 	private Curriculum curriculum;
 	
 	

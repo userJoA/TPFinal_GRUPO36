@@ -24,7 +24,7 @@ public class WebSecurityConfiguration {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 //nota
-		http.authorizeRequests().antMatchers("/login").permitAll().antMatchers("/", "/home","/**").permitAll().antMatchers(resources).permitAll().anyRequest()
+		http.authorizeRequests().antMatchers("/login").permitAll().antMatchers("/", "/home").permitAll().antMatchers(resources).permitAll().anyRequest()
 				.authenticated().and().formLogin().loginPage("/login").permitAll().successHandler(autenticacion)
 				.failureUrl("/login?error=true").usernameParameter("dni").passwordParameter("password").and().logout()
 				.permitAll();

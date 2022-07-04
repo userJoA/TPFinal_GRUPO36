@@ -4,6 +4,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,8 +17,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.edu.unju.fi.entity.Anuncio;
 import ar.edu.unju.fi.entity.Empleador;
-
+import ar.edu.unju.fi.service.IAnuncioService;
 import ar.edu.unju.fi.service.IEmpleadorService;
 
 
@@ -26,7 +29,10 @@ import ar.edu.unju.fi.service.IEmpleadorService;
 public class empleadorController {
 	@Autowired 
 	@Qualifier("EmpleadorService")
-	IEmpleadorService empleadorService;
+	private IEmpleadorService empleadorService;
+	
+	@Autowired
+	private IAnuncioService anuncioService;
 	
 	private static final Log LOGGER = LogFactory.getLog(empleadorController.class);
 	
@@ -108,6 +114,31 @@ public class empleadorController {
 	}
 	
 	
+	/*INICIO EMPLEADOR*/
+	@GetMapping("/inicio")
+	public ModelAndView obtenerPaginaInicioEmpleador(@AuthenticationPrincipal User user) throws Exception {
+		ModelAndView mav= new ModelAndView("empleador/login_empleador");
+		Empleador emp= new Empleador();
+		emp=empleadorService.buscarPorDni(Long.parseLong(user.getUsername()));
+		LOGGER.info("Method: obtenerPaginaInicioEmpleador | ACTION: El usuario : "+ emp.getEmail() + " ha iniciado secion" );
+		mav.addObject("empleador", emp);
+		return mav;
+		
+	}
+	
+	
+	/*ALTA ANUNCIO*/
+	@GetMapping("/altaAnuncio")
+	public ModelAndView crearAnuncio(@AuthenticationPrincipal User user) throws Exception {
+		Empleador emp= new Empleador();
+		emp=empleadorService.buscarPorDni(Long.parseLong(user.getUsername()));
+		ModelAndView mav= new ModelAndView("empleador/form_oferta_laboral_alta");
+		Anuncio anuncio= anuncioService.getAnuncio();
+		mav.addObject("anuncio", anuncio);
+		 mav.addObject("empleador", emp); 
+		return mav;
+		
+	}
 	
 	
 }
