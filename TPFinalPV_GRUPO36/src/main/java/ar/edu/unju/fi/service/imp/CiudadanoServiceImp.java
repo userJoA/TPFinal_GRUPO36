@@ -28,6 +28,7 @@ public class CiudadanoServiceImp implements ICiudadanoService {
 		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(4);
 		ciudadano.setPassword(bCryptPasswordEncoder.encode(pw));
 		ciudadano.setTipo("tipoCiudadano");
+		ciudadano.setName(ciudadano.getDni());
 		ciudadanoRepository.save(ciudadano);
 		return true;
 		
