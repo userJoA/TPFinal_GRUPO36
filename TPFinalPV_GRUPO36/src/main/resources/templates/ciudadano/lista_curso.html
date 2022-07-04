@@ -25,21 +25,19 @@
 							<th>titulo</th>                    
 							<th>categoria</th>
 							<th>Inicio</th>
-							<th>Final</th>
-							<th>cantidadHoras</th>
 							<th>Docente</th>
-							<th>Modalidad</th>
-							<th>opciones</th>
+							<th>Inscripción</th>
+							
                 </tr>
-             <tr th:each="cusrso: ${cusrsos}">
+             <tr th:each="curso: ${cursos}">
                     <td th:text="${curso.codigo}"></td>
                     <td th:text="${curso.titulo}"></td>
 					<td th:text="${curso.categoria}"></td>
-					<td th:text="${curso.inicio}"></td>
-					<td th:text="${curso.final}"></td>
-					<td th:text="${curso.cantidadHoras}"></td>
-					<td th:text="${curso.docente}"></td>
-					<td th:text="${curso.modalidad}"></td>
+					
+					
+					<td th:text="${curso.fechaInicio}"></td>
+					<td th:text="${curso.docente.apellido}"></td>
+					
                     <td>
                         <a  class="btn btn-primary">Cursar</a>
 

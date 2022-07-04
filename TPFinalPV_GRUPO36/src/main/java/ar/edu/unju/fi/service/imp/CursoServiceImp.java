@@ -5,12 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import ar.edu.unju.fi.entity.Curso;
 
 import ar.edu.unju.fi.service.ICursoService;
 import ar.edu.unju.fi.util.ListaCurso;
 
-@Service
+@Service ("cursoServiceList")
 public class CursoServiceImp implements ICursoService {
 
 	
@@ -25,11 +26,12 @@ public class CursoServiceImp implements ICursoService {
 	//}
 
 	@Override
-	public List<Curso> obtenerCursos() {
-		// TODO Auto-generated method stub
-		return cursos.getCursos();
+	
+	public ListaCurso listaCursos() {
+		
+		return cursos;
+		
 	}
-
 	
 
 	@Override
@@ -37,7 +39,10 @@ public class CursoServiceImp implements ICursoService {
 		// TODO Auto-generated method stub
 		return new Curso();
 	}
-	
+	public boolean guardarCandidato(Curso curso) {
+		//agregar un candidato
+		return ListaCurso.getCursos().add(curso);
+	}
 	
 
 }

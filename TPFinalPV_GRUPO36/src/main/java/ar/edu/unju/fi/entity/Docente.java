@@ -51,8 +51,8 @@ public class Docente {
 	//@Column(name = "TELEFONO", nullable = true)
 	//private long telefono;
 	
-	@OneToMany(mappedBy = "docente", cascade= CascadeType.ALL)
-	private List<Curso> cursos=new ArrayList<Curso>();
+	//@OneToMany(mappedBy = "docente", cascade= CascadeType.ALL)
+	//private List<Curso> cursos=new ArrayList<Curso>();
 	
 	public Docente() {
 		super();
@@ -64,8 +64,6 @@ public class Docente {
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.email = email;
-		//this.telefono = telefono;
-
 	}
 	public int getLegajo() {
 		return legajo;
@@ -101,14 +99,18 @@ public class Docente {
 	
 	
 
-	public List<Curso> getCursos() {
-		return cursos;
-	}
+	//public List<Curso> getCursos() {
+	//	return cursos;
+	//}
 
-	public void setCursos(List<Curso> cursos) {
-		this.cursos = cursos;
-	}
+	//public void setCursos(List<Curso> cursos) {
+	//	this.cursos = cursos;
+	//}
 
+	@Override
+	public String toString() {
+		return "Docente [legajo=" + legajo +"nombre="+nombre+"apellido="+apellido+ "email="+email + "]";
+	}
 
 	
 }
