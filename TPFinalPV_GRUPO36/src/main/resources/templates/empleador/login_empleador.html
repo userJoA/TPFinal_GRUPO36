@@ -1,26 +1,56 @@
 <!DOCTYPE html>
-<html lang="es">
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar sesión</title>
+    <link rel="shortcut icon" th:href="@{/images/iconoCV.png}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <!--<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}" />
-<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">-->
+    <!--<link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}" />-->
+	<link rel="stylesheet" type="text/css" th:href="@{/css/Style.css}">
 </head>
 
-<body>
-    <div class="container">
-        <header th:replace="layouts/header :: header"></header>
-        <nav th:replace="layouts/nav :: nav"></nav>
+<body id="loginEmpresa">
+	
+	<header th:replace="layouts/header :: header"></header>
+	
+	<div class="container">        
         <main>
-
-        </main>
-        <footer th:replace="layouts/footer :: footer"></footer>
+			<div class="col-12 col-sm-10 offset-sm-1 col-md-6 offset-md-3">
+				<div class="card traslucido1 text-white border-white">
+					<div class="card-header text-center"><h4>Login Empleador</h4></div>
+					<div class="card-body">
+						<div class="mb-3 row">
+							<label for="inputPassword" class="col-sm-4 col-lg-3 col-form-label">CUIT</label>
+							<div class="col-sm-8 col-lg-9">
+								<input type="number" class="form-control" id="inputPassword" placeholder="El nro. de CUIT">
+							</div>
+						</div>
+						<div class="mb-3 row">
+							<label for="inputPassword" class="col-sm-4 col-lg-3 col-form-label">Password</label>
+							<div class="col-sm-8 col-lg-9">
+								<input type="password" class="form-control" id="inputPassword" placeholder="su contraseña">
+							</div>
+						</div>
+						<p class="text-end"><a th:href="@{/empleador/formulario}">Si no tiene cuenta, regístrese por AQUÍ</a></p>
+					</div>
+					<div class="card-footer">
+						<div class="row justify-content-evenly">
+							<a th:href="@{/}" class="btn btn-secondary col-5">Cancelar</a>
+							<a class="btn btn-primary col-5">Ingresar</a>
+						</div>
+					</div>
+				</div>
+			</div>
+        </main>        
     </div>
+    
+    <footer th:replace="layouts/footer :: footer"></footer>
+    
 </body>
 
 </html>
+
