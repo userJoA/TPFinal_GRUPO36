@@ -66,27 +66,42 @@ public class Curso {
 	@NotEmpty(message="Categoría no puede ser vacío")
 	private String categoria;
 	
+	@Column(name = "Cupo")
+	private int cupo;
 	//
 	//
 	//
 	//
-	public Curso(int i, String string, String string2, LocalDate localDate, LocalDate localDate2, int j, String string3, Docente docente1) {
+	public Curso(){}
+	
+	public Curso(int i, String string, String string2, LocalDate localDate, LocalDate localDate2, int j, String string3, Docente docente1, int cupo) {
 		super();
 	}
 	
-	/*public Curso(int codigo, String titulo, String categoria, LocalDate fechaInicio, LocalDate fechaFinal,
-			int cantidadHoras, String modalidad, Docente docente) {
+
+
+	public Curso(
+			@Min(value = 1, message = "El valor mínimo es 1") @Max(value = 9999, message = "El valor máximo permitido es 9999") int codigo,
+			@NotEmpty(message = "El título no puede ser vacío") String titulo,
+			@NotNull @FutureOrPresent(message = "La fecha debe ser hoy o posterior") LocalDate fechaInicio,
+			@NotNull @Future(message = "La fecha debe ser posterior a la actual") LocalDate fechaFinal,
+			@Min(value = 1, message = "Cantidad de horas debe ser mayor a 1") int cantidadHoras,
+			@NotEmpty(message = "Modalidad no puede ser vacío") String modalidad,
+			@NotNull(message = "Debe seleccionar un docente") Docente docente,
+			@NotEmpty(message = "Categoría no puede ser vacío") String categoria, int cupo) {
 		super();
 		this.codigo = codigo;
 		this.titulo = titulo;
-		this.categoria = categoria;
 		this.fechaInicio = fechaInicio;
 		this.fechaFinal = fechaFinal;
 		this.cantidadHoras = cantidadHoras;
 		this.modalidad = modalidad;
 		this.docente = docente;
+		this.categoria = categoria;
+		this.cupo = cupo;
 	}
-	*/
+
+
 
 	public int getCodigo() {
 		return codigo;
@@ -151,5 +166,15 @@ public class Curso {
 	public void setDocente(Docente docente) {
 		this.docente = docente;
 	}
+
+	public int getCupo() {
+		return cupo;
+	}
+
+	public void setCupo(int cupo) {
+		this.cupo = cupo;
+	}
+	
+	
 	
 }
