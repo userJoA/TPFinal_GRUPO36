@@ -12,6 +12,8 @@ public interface IAnuncioService {
 	
 	public Anuncio modificarAnuncio(Anuncio anuncio) throws Exception;
 	
+	public void modificar(Anuncio anuncio);
+	
 	public void eliminarAnuncio(Long id) throws Exception;
 	
 	public Anuncio buscarPorId(Long id) throws Exception;

@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import org.springframework.stereotype.Component;
 
@@ -44,6 +45,7 @@ public class Curriculum {
 //	private List<Item> experiencias = new ArrayList<Item>();
 	
 	@Column(name = "cv_estudio")
+	@NotBlank(message = "Puede colocar porcentaje aprobado de la carrera o carrera en curso")
 	private String estudio;
 	
 	@Column(name = "cv_curso")
