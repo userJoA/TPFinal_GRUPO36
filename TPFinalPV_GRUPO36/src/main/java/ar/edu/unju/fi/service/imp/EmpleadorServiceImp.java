@@ -35,6 +35,7 @@ public class EmpleadorServiceImp implements IEmpleadorService {
 		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(4);
 		empleador.setPassword(bCryptPasswordEncoder.encode(pw));
 		empleador.setTipo("tipoEmpleador");
+		empleador.setName(empleador.getCuit());
 		empleadorRepository.save(empleador);
 		return true;
 	}
