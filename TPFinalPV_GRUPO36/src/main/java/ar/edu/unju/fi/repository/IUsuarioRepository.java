@@ -10,5 +10,5 @@ import ar.edu.unju.fi.entity.Usuario;
 
 
 public interface IUsuarioRepository extends JpaRepository<Usuario,Long> {
-	public Optional<Usuario> findByDni(Long dni);
+	public Optional<Usuario> findByName(Long name);
 }
