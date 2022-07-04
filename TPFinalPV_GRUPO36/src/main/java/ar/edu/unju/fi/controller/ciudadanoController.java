@@ -27,7 +27,10 @@ public class ciudadanoController {
 	
 	private static final Log LOGGER = LogFactory.getLog(ciudadanoController.class);
 	
-
+	@GetMapping("/login")
+	public String getCiudadanoLoginPage() {
+		return "/ciudadano/login_ciudadano";
+	}
 	
 	@GetMapping("/lista")
 	public String getListaCiu(Model model) {
