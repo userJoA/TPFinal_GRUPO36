@@ -66,9 +66,9 @@ public class empleadorController {
 			ModelAndView mav = new ModelAndView("/empleador/form_empleador_alta");
 			mav.addObject("empleador",empleador);
 			return mav;
-		}
-		
+		}		
 		ModelAndView mav= new ModelAndView("redirect:/empleador/lista");
+		empleador.setEstado(true);
 		empleadorService.saveEmpleador(empleador);
 		LOGGER.info("Se agrego un nuevo empleador a la lista");
 		return mav;

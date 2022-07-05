@@ -70,7 +70,7 @@ public class EmpleadorServiceImp implements IEmpleadorService {
 
 	@Override
 	public Empleador buscarPorDni(Long cuit) throws Exception {
-		return empleadorRepository.findByDni(cuit).orElseThrow(()-> new Exception("El Empleador no existe") );
+		return empleadorRepository.findByCuit(cuit).orElseThrow(()-> new Exception("El Empleador no existe") );
 	}
 	
 	

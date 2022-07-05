@@ -15,7 +15,7 @@ main{
 	margin-bottom:80px;
 }
 
-#principal{
+.principal{
 	background-image: url("../images/trabajador.jpg");
 	background-repeat:no-repeat;
 	background-size:cover;
