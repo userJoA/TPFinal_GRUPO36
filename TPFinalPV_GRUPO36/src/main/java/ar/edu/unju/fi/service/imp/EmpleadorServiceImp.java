@@ -69,8 +69,10 @@ public class EmpleadorServiceImp implements IEmpleadorService {
 	}
 
 	@Override
+
 	public Empleador buscarPorCuit(Long cuit) throws Exception {
 		return empleadorRepository.findByName(cuit).orElseThrow(()-> new Exception("El Empleador no existe") );
+
 	}
 	
 	
