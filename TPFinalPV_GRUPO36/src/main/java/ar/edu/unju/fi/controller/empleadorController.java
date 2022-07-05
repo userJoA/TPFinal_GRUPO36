@@ -68,7 +68,7 @@ public class empleadorController {
 			return mav;
 		}
 		
-		ModelAndView mav= new ModelAndView("redirect:/empleador/lista");
+		ModelAndView mav= new ModelAndView("/layouts/registroCorrecto");
 		empleadorService.saveEmpleador(empleador);
 		LOGGER.info("Se agrego un nuevo empleador a la lista");
 		return mav;
@@ -117,9 +117,9 @@ public class empleadorController {
 	/*INICIO EMPLEADOR*/
 	@GetMapping("/inicio")
 	public ModelAndView obtenerPaginaInicioEmpleador(@AuthenticationPrincipal User user) throws Exception {
-		ModelAndView mav= new ModelAndView("empleador/login_empleador");
+		ModelAndView mav= new ModelAndView("empleador/inicio_empleador");
 		Empleador emp= new Empleador();
-		emp=empleadorService.buscarPorDni(Long.parseLong(user.getUsername()));
+		emp=empleadorService.buscarPorCuit(Long.parseLong(user.getUsername()));
 		LOGGER.info("Method: obtenerPaginaInicioEmpleador | ACTION: El usuario : "+ emp.getEmail() + " ha iniciado secion" );
 		mav.addObject("empleador", emp);
 		return mav;
@@ -131,7 +131,7 @@ public class empleadorController {
 	@GetMapping("/altaAnuncio")
 	public ModelAndView crearAnuncio(@AuthenticationPrincipal User user) throws Exception {
 		Empleador emp= new Empleador();
-		emp=empleadorService.buscarPorDni(Long.parseLong(user.getUsername()));
+		emp=empleadorService.buscarPorCuit(Long.parseLong(user.getUsername()));
 		ModelAndView mav= new ModelAndView("empleador/form_oferta_laboral_alta");
 		Anuncio anuncio= anuncioService.getAnuncio();
 		mav.addObject("anuncio", anuncio);

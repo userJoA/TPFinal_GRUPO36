@@ -43,8 +43,8 @@ public class Empleador extends Usuario{
 	
 	@Positive(message = "El cuit debe ser un numero valido")
      
-	@Column(name = "emp_cuit", nullable = false)
-	private Long cuit;
+	//@Column(name = "emp_cuit", nullable = false)
+	//private Long cuit;
 	
 	//@NotEmpty(message="Este campo no puede estar vacio")
 	//@Size(min=8,message = "la contraseña debe tener como minimo 8 caracteres") 
@@ -367,18 +367,6 @@ public class Empleador extends Usuario{
 
 
 
-
-
-
-
-	@Override
-	public String toString() {
-		return "Empleador [id=" + id  +"cuit="+cuit +", razon_social=" + razon_social
-				+ ", nombre_comercial=" + nombre_comercial + ", inicio=" + inicio + ", email=" + email + ", telefono="
-				+ telefono + ", direccion=" + direccion + ", provincia=" + provincia + ", pagina=" + pagina
-				+ ", descripcion=" + descripcion + ", estado=" + estado + "]";
-	}
-
 	
 
 	public Empleador(Long id,
@@ -399,19 +387,6 @@ public class Empleador extends Usuario{
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-
-
-
-	public Long getCuit() {
-		return cuit;
-	}
-
-
-
-	public void setCuit(Long cuit) {
-		this.cuit = cuit;
-	}
-
 
 
 

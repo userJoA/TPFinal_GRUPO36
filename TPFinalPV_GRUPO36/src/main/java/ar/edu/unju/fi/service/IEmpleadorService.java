@@ -16,7 +16,7 @@ public interface IEmpleadorService{
 	public Empleador modificarEmpleador(Empleador empleador) throws Exception;
 	public void eliminarEmpleador(Long id);
 	public Empleador buscarPorId(Long id) throws Exception;
-	public Empleador buscarPorDni(Long cuit) throws Exception;
+	public Empleador buscarPorCuit(Long name) throws Exception;
 	
 	
 	
