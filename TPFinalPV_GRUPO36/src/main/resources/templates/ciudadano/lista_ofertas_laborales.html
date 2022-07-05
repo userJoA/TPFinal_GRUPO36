@@ -41,7 +41,7 @@
 							<p th:text="'Tiempo: '+${oferta.tiempoDisponible}"></p>
 						</div>
 						<div class="card-footer d-grid gap-2 d-md-flex justify-content-md-end">							
-							<a class="btn btn-primary btn-sm">Postularme</a>							
+							<a class="btn btn-primary btn-sm" th:href="@{/ciudadano/postulacion/}+${ciudadano.id}+'/'+${oferta.idAnuncio}" >Postularme</a>							
 						</div>						
 					</div>
 					

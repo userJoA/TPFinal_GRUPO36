@@ -35,7 +35,7 @@ public class EmpleadorServiceImp implements IEmpleadorService {
 		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(4);
 		empleador.setPassword(bCryptPasswordEncoder.encode(pw));
 		empleador.setTipo("tipoEmpleador");
-		empleador.setName(empleador.getCuit());
+		//empleador.setName(empleador.getCuit());
 		empleadorRepository.save(empleador);
 		return true;
 	}
@@ -69,8 +69,8 @@ public class EmpleadorServiceImp implements IEmpleadorService {
 	}
 
 	@Override
-	public Empleador buscarPorDni(Long cuit) throws Exception {
-		return empleadorRepository.findByDni(cuit).orElseThrow(()-> new Exception("El Empleador no existe") );
+	public Empleador buscarPorCuit(Long cuit) throws Exception {
+		return empleadorRepository.findByName(cuit).orElseThrow(()-> new Exception("El Empleador no existe") );
 	}
 	
 	

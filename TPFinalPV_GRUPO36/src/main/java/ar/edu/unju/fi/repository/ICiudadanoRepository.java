@@ -16,12 +16,11 @@ public interface ICiudadanoRepository extends JpaRepository<Ciudadano,Long>{
 	
 	public List<Ciudadano> findByEstado(boolean estado);
 	
-	@Query("delete from Ciudadano c where c.dni = ?1")
-	public void deleteByDni(int dni);
+	
 	
 	//public Ciudadano findByDni(int dni);
 	
 	
-	public Optional<Ciudadano> findByDni(Long dni);
+	public Optional<Ciudadano> findByName(Long name);
 
 }

@@ -18,7 +18,7 @@ public interface IEmpleadorRepository extends JpaRepository<Empleador,Long>{
 
 	
 	
-	public Optional<Empleador> findByDni(Long cuit);
+	public Optional<Empleador> findByName(Long name);
 	
 
 //	public Empleador findByCuit(Long cuit);
