@@ -31,15 +31,21 @@ public abstract class Usuario {
 	private Long id;
 	//@Min(value=10000000, message="Debe ser mayor a 1000000") 
 	//@Max(value=99999999,message="Debe ser menor a 99999999")
-	@Column(name = "cuit_dni")
-	private Long dni;
+	//@Column(name = "cuit_dni")
+	//private Long dni;
+	
 	@NotEmpty(message="Este campo no puede estar vacio")
 	@Size(min=8,message = "la contraseña debe tener como minimo 8 caracteres")
 	@Column(name = "usr_password") 
 	private String password;
+	
 	@Column(name = "ciu_tipo") 
 	private String tipo;
-private Long name;
+	
+	@Column(name = "cuit_dni")
+	private Long name;
+	
+	
 	public String getPassword() {
 		return password;
 	}

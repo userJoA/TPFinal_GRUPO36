@@ -1,11 +1,14 @@
 package ar.edu.unju.fi.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
@@ -63,6 +66,9 @@ public class Anuncio {
 	@JoinColumn(name = "Emp_ID")
 	private Empleador empleador;
 	
+	@ManyToMany(mappedBy = "ofertas")
+	private List<Ciudadano> ciudadanos;
+	
 	//private Contacto contacto;
 	//private String jornada;
 	
@@ -72,6 +78,16 @@ public class Anuncio {
 	}
 	
 	
+	public List<Ciudadano> getCiudadanos() {
+		return ciudadanos;
+	}
+
+
+	public void setCiudadanos(List<Ciudadano> ciudadanos) {
+		this.ciudadanos = ciudadanos;
+	}
+
+
 	public Long getIdAnuncio() {
 		return idAnuncio;
 	}
