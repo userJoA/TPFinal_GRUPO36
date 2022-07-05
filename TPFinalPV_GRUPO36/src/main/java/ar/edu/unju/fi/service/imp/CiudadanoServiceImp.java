@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import ar.edu.unju.fi.entity.Anuncio;
 import ar.edu.unju.fi.entity.Ciudadano;
 import ar.edu.unju.fi.repository.ICiudadanoRepository;
 import ar.edu.unju.fi.service.ICiudadanoService;
@@ -28,7 +29,7 @@ public class CiudadanoServiceImp implements ICiudadanoService {
 		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(4);
 		ciudadano.setPassword(bCryptPasswordEncoder.encode(pw));
 		ciudadano.setTipo("tipoCiudadano");
-		ciudadano.setName(ciudadano.getDni());
+		//ciudadano.setName(ciudadano.getDni());
 		ciudadanoRepository.save(ciudadano);
 		return true;
 		
@@ -42,7 +43,7 @@ public class CiudadanoServiceImp implements ICiudadanoService {
 	@Override
 	public Ciudadano modificarCiudadano(Ciudadano ciudadano) throws Exception {
 		Ciudadano c= buscarPorId(ciudadano.getId());
-		c.setDni(ciudadano.getDni());
+		//c.setDni(ciudadano.getDni());
 		c.setEmail(ciudadano.getEmail());
 		c.setEstado_civil(ciudadano.getEstado_civil());
 		c.setNumero_tramite(ciudadano.getNumero_tramite());
@@ -87,7 +88,13 @@ public class CiudadanoServiceImp implements ICiudadanoService {
 	@Override
 	public Ciudadano buscarPorDni(Long dni) throws Exception {
 		
-		return ciudadanoRepository.findByDni(dni).orElseThrow(()-> new Exception("El ciudadano no existe") );
+		return ciudadanoRepository.findByName(dni).orElseThrow(()-> new Exception("El ciudadano no existe") );
+	}
+
+	@Override
+	public List<Ciudadano> ciudadanosXanuncio(Anuncio anuncio) {
+		
+		return ciudadanoRepository.findByOfertas(anuncio);
 	}
 
 	

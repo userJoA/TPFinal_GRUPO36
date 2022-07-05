@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-
+import ar.edu.unju.fi.entity.Anuncio;
 import ar.edu.unju.fi.entity.Ciudadano;
 
 
@@ -16,12 +16,13 @@ public interface ICiudadanoRepository extends JpaRepository<Ciudadano,Long>{
 	
 	public List<Ciudadano> findByEstado(boolean estado);
 	
-	@Query("delete from Ciudadano c where c.dni = ?1")
-	public void deleteByDni(int dni);
+	
 	
 	//public Ciudadano findByDni(int dni);
 	
 	
-	public Optional<Ciudadano> findByDni(Long dni);
+	public Optional<Ciudadano> findByName(Long name);
+	
+	public List<Ciudadano> findByOfertas(Anuncio anuncio);
 
 }

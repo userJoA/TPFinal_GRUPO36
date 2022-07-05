@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ar.edu.unju.fi.entity.Anuncio;
 import ar.edu.unju.fi.entity.Empleador;
 import ar.edu.unju.fi.service.IAnuncioService;
+import ar.edu.unju.fi.service.ICiudadanoService;
 import ar.edu.unju.fi.service.IEmpleadorService;
 
 
@@ -33,6 +34,10 @@ public class empleadorController {
 	
 	@Autowired
 	private IAnuncioService anuncioService;
+	
+	
+	@Autowired
+	private ICiudadanoService ciudadanoService;
 	
 	private static final Log LOGGER = LogFactory.getLog(empleadorController.class);
 	
@@ -68,7 +73,7 @@ public class empleadorController {
 			return mav;
 		}
 		
-		ModelAndView mav= new ModelAndView("redirect:/empleador/lista");
+		ModelAndView mav= new ModelAndView("/layouts/registroCorrecto");
 		empleadorService.saveEmpleador(empleador);
 		LOGGER.info("Se agrego un nuevo empleador a la lista");
 		return mav;
@@ -117,11 +122,12 @@ public class empleadorController {
 	/*INICIO EMPLEADOR*/
 	@GetMapping("/inicio")
 	public ModelAndView obtenerPaginaInicioEmpleador(@AuthenticationPrincipal User user) throws Exception {
-		ModelAndView mav= new ModelAndView("empleador/login_empleador");
+		ModelAndView mav= new ModelAndView("empleador/inicio_empleador");
 		Empleador emp= new Empleador();
-		emp=empleadorService.buscarPorDni(Long.parseLong(user.getUsername()));
-		LOGGER.info("Method: obtenerPaginaInicioEmpleador | ACTION: El usuario : "+ emp.getEmail() + " ha iniciado secion" );
+		emp=empleadorService.buscarPorCuit(Long.parseLong(user.getUsername()));
+		LOGGER.info("Method: obtenerPaginaInicioEmpleador | ACTION: El usuario : "+ emp.getEmail() + " ha iniciado sesion" );
 		mav.addObject("empleador", emp);
+		mav.addObject("anuncios", emp.getAnuncios());
 		return mav;
 		
 	}
@@ -131,7 +137,7 @@ public class empleadorController {
 	@GetMapping("/altaAnuncio")
 	public ModelAndView crearAnuncio(@AuthenticationPrincipal User user) throws Exception {
 		Empleador emp= new Empleador();
-		emp=empleadorService.buscarPorDni(Long.parseLong(user.getUsername()));
+		emp=empleadorService.buscarPorCuit(Long.parseLong(user.getUsername()));
 		ModelAndView mav= new ModelAndView("empleador/form_oferta_laboral_alta");
 		Anuncio anuncio= anuncioService.getAnuncio();
 		mav.addObject("anuncio", anuncio);
@@ -139,6 +145,33 @@ public class empleadorController {
 		return mav;
 		
 	}
+	
+	
+	/*POSTULANTES*/
+	
+	@GetMapping("/verAnuncios")
+	public ModelAndView verAnuncios(@AuthenticationPrincipal User user) throws  Exception {
+		ModelAndView mav= new ModelAndView("empleador/lista_ofertas_laborales");
+		Empleador emp= new Empleador();
+		emp=empleadorService.buscarPorCuit(Long.parseLong(user.getUsername()));
+		mav.addObject("ofertas",emp.getAnuncios());
+		LOGGER.info("Method: verAnunciosPropios | ACTION: se muestra una lista de las ofertas ofrecidas y sus postulaciones" );
+		return mav;
+		
+	}
+	
+	
+	@GetMapping("/verPostulantes/{id_anuncio}")
+	public ModelAndView verPostulantesDeUnAnuncio(@PathVariable ("id_anuncio") Long id_anuncio) throws Exception {
+		ModelAndView mav=new ModelAndView("/empleador/postulantes_anuncio");
+		mav.addObject("anuncio", anuncioService.buscarPorId(id_anuncio));
+		mav.addObject("postulantes",ciudadanoService.ciudadanosXanuncio(anuncioService.buscarPorId(id_anuncio)));
+		return mav;
+	}
+	
+	
+	
+	
 	
 	
 }

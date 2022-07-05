@@ -43,8 +43,8 @@ public class Empleador extends Usuario{
 	
 	@Positive(message = "El cuit debe ser un numero valido")
      
-	@Column(name = "emp_cuit", nullable = false)
-	private Long cuit;
+	//@Column(name = "emp_cuit", nullable = false)
+	//private Long cuit;
 	
 	//@NotEmpty(message="Este campo no puede estar vacio")
 	//@Size(min=8,message = "la contraseña debe tener como minimo 8 caracteres") 
@@ -113,39 +113,7 @@ public class Empleador extends Usuario{
 
 
 	
-	public Empleador(Long id,
-			String razon_social,
-			String nombre_comercial,
-			LocalDate inicio,
-			String email,
-			Long telefono,String direccion,
-			String provincia,
-			String pagina, String descripcion, boolean estado,
-			List<Anuncio> ofertas){
-		super();
-		this.id = id;
-		//this.cuit = cuit;
-		//this.password = password;
-		this.razon_social = razon_social;
-		this.nombre_comercial = nombre_comercial;
-		this.inicio = inicio;
-		this.email = email;
-		this.telefono = telefono;
-		this.direccion = direccion;
-		this.provincia = provincia;
-		this.pagina = pagina;
-		this.descripcion = descripcion;
-		this.estado = estado;
-		this.anuncios = ofertas;
 	
-	}
-
-
-
-
-
-
-
 
 	public List<Anuncio> getAnuncios() {
 		return anuncios;
@@ -171,20 +139,9 @@ public class Empleador extends Usuario{
 
 
 
-
-
-
-
-	
-
-
-
-
-
 	public String getRazon_social() {
 		return razon_social;
 	}
-
 
 
 
@@ -342,52 +299,6 @@ public class Empleador extends Usuario{
 	}
 
 
-	
-
-
-	public List<Anuncio> getOfertas() {
-		return anuncios;
-	}
-
-
-
-
-
-
-
-
-
-
-	public void setOfertas(List<Anuncio> ofertas) {
-		this.anuncios = ofertas;
-	}
-
-
-
-
-
-
-
-
-
-
-	@Override
-	public String toString() {
-		return "Empleador [id=" + id  +"cuit="+cuit +", razon_social=" + razon_social
-				+ ", nombre_comercial=" + nombre_comercial + ", inicio=" + inicio + ", email=" + email + ", telefono="
-				+ telefono + ", direccion=" + direccion + ", provincia=" + provincia + ", pagina=" + pagina
-				+ ", descripcion=" + descripcion + ", estado=" + estado + "]";
-	}
-
-	
-
-	public Empleador(Long id,
-			@NotEmpty(message = "Este campo no puede estar vacio") @Size(min = 8, message = "la contraseña debe tener como minimo 8 caracteres") String password,
-			String tipo, Long name) {
-		super(id, password, tipo, name);
-		// TODO Auto-generated constructor stub
-	}
-
 
 
 	public Usuario getUsuario() {
@@ -399,19 +310,6 @@ public class Empleador extends Usuario{
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-
-
-
-	public Long getCuit() {
-		return cuit;
-	}
-
-
-
-	public void setCuit(Long cuit) {
-		this.cuit = cuit;
-	}
-
 
 
 
