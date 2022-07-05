@@ -68,9 +68,15 @@ public class EmpleadorServiceImp implements IEmpleadorService {
 		return empleadorRepository.save(emp);
 	}
 
+//	@Override
+//	public Empleador buscarPorDni(Long cuit) throws Exception {
+//		return empleadorRepository.findByCuit(cuit).orElseThrow(()-> new Exception("El Empleador no existe") );
+//	}
+
 	@Override
-	public Empleador buscarPorDni(Long cuit) throws Exception {
-		return empleadorRepository.findByCuit(cuit).orElseThrow(()-> new Exception("El Empleador no existe") );
+	public Empleador buscarPorCuit(Long name) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	
