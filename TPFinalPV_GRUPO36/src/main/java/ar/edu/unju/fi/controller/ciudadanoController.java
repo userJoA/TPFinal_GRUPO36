@@ -149,13 +149,21 @@ public class ciudadanoController {
 	  public ModelAndView verCV(@AuthenticationPrincipal User user) throws Exception {
 		  Ciudadano ciudadano= ciudadanoService.obtenerCiudadano();
 		  ciudadano=ciudadanoService.buscarPorDni(Long.parseLong(user.getUsername()));
-		  ModelAndView mav=new ModelAndView("ciudadano/portal_ciudadano");
-		  Curriculum cv =new Curriculum();
-		  cv=ciudadano.getCurriculum();
-		  LOGGER.info(cv.getCurso());
-		  mav.addObject("curriculum", cv);
-		  LOGGER.info("Method: /ciudadano/verCV/  Action:Se muestra el curriculum de: " + ciudadano.getEmail());
-		  return mav;
+		  
+		  if(ciudadano.getCurriculum()==null){
+			  LOGGER.error(ciudadano.getEmail()+" No creo un curriculum");
+			  ModelAndView mav=new ModelAndView("layouts/no_curriculum");
+			  return mav;
+		  }
+		  else
+		  {
+			  ModelAndView mav=new ModelAndView("ciudadano/portal_ciudadano");
+			  Curriculum cv =new Curriculum();
+			  cv=ciudadano.getCurriculum();
+			  mav.addObject("curriculum", cv);
+			  LOGGER.info("Method: /ciudadano/verCV/  Action:Se muestra el curriculum de: " + ciudadano.getEmail());
+			  return mav;
+			 }
 		  
 	  }
 	  

@@ -166,6 +166,7 @@ public class empleadorController {
 		ModelAndView mav=new ModelAndView("/empleador/postulantes_anuncio");
 		mav.addObject("anuncio", anuncioService.buscarPorId(id_anuncio));
 		mav.addObject("postulantes",ciudadanoService.ciudadanosXanuncio(anuncioService.buscarPorId(id_anuncio)));
+		
 		return mav;
 	}
 	
