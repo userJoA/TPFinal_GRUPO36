@@ -93,12 +93,9 @@ public class Ciudadano extends Usuario{
 	
 	
 	@ManyToMany(cascade=CascadeType.ALL)
-	@JoinTable(
-			name= "rel_ciudadanos_Anuncio",
+	@JoinTable(name= "rel_ciudadanos_Anuncio",
 			joinColumns= {@JoinColumn(name="CIUDADANO_ID")},
-			inverseJoinColumns= {@JoinColumn(name="ANUNCIO_ID")}
-			)
-	
+			inverseJoinColumns= {@JoinColumn(name="ANUNCIO_ID")})	
 	private List <Anuncio> ofertas;
 	
 
