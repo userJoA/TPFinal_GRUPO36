@@ -26,7 +26,7 @@ public class WebSecurityConfiguration {
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
 
-		http.authorizeRequests().antMatchers(resources).permitAll().antMatchers("/login").permitAll().antMatchers("/", "/home","/**").permitAll().antMatchers(resources).permitAll().anyRequest()
+		http.authorizeRequests().antMatchers("/login").permitAll().antMatchers(resources).permitAll().antMatchers("/", "/home","/curso/**","/alta/ciudadano","/ciudadano/formulario","/empleador/guardar","/alta/empleador").permitAll().antMatchers(resources).permitAll().anyRequest()
 
 				.authenticated().and().formLogin().loginPage("/login").permitAll().successHandler(autenticacion)
 				.failureUrl("/login?error=true").usernameParameter("dni").passwordParameter("password").and().logout()
