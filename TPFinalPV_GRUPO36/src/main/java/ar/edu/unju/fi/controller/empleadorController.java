@@ -18,8 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.entity.Anuncio;
+import ar.edu.unju.fi.entity.Ciudadano;
+import ar.edu.unju.fi.entity.Ciudadano_Anuncio;
 import ar.edu.unju.fi.entity.Empleador;
 import ar.edu.unju.fi.service.IAnuncioService;
+import ar.edu.unju.fi.service.ICiudadanoService;
+import ar.edu.unju.fi.service.ICiudadano_AnuncioService;
 import ar.edu.unju.fi.service.IEmpleadorService;
 
 
@@ -33,6 +37,14 @@ public class empleadorController {
 	
 	@Autowired
 	private IAnuncioService anuncioService;
+	
+	
+	@Autowired
+	private ICiudadanoService ciudadanoService;
+	
+	@Autowired
+	private ICiudadano_AnuncioService ciudadano_anuncioService;
+	
 	
 	private static final Log LOGGER = LogFactory.getLog(empleadorController.class);
 	
@@ -120,8 +132,9 @@ public class empleadorController {
 		ModelAndView mav= new ModelAndView("empleador/inicio_empleador");
 		Empleador emp= new Empleador();
 		emp=empleadorService.buscarPorCuit(Long.parseLong(user.getUsername()));
-		LOGGER.info("Method: obtenerPaginaInicioEmpleador | ACTION: El usuario : "+ emp.getEmail() + " ha iniciado secion" );
+		LOGGER.info("Method: obtenerPaginaInicioEmpleador | ACTION: El usuario : "+ emp.getEmail() + " ha iniciado sesion" );
 		mav.addObject("empleador", emp);
+		mav.addObject("anuncios", emp.getAnuncios());
 		return mav;
 		
 	}
@@ -139,6 +152,60 @@ public class empleadorController {
 		return mav;
 		
 	}
+	
+	
+	/*POSTULANTES*/
+	
+	@GetMapping("/verAnuncios")
+	public ModelAndView verAnuncios(@AuthenticationPrincipal User user) throws  Exception {
+		ModelAndView mav= new ModelAndView("empleador/lista_ofertas_laborales");
+		Empleador emp= new Empleador();
+		emp=empleadorService.buscarPorCuit(Long.parseLong(user.getUsername()));
+		
+		mav.addObject("ofertas",emp.getAnuncios());
+		LOGGER.info("Method: verAnunciosPropios | ACTION: se muestra una lista de las ofertas ofrecidas y sus postulaciones" );
+		return mav;
+		
+	}
+	
+	
+	@GetMapping("/verPostulantes/{id_anuncio}")
+	public ModelAndView verPostulantesDeUnAnuncio(@PathVariable ("id_anuncio") Long id_anuncio) throws Exception {
+		ModelAndView mav=new ModelAndView("/empleador/postulantes_anun");
+		mav.addObject("anuncio", anuncioService.buscarPorId(id_anuncio));
+		mav.addObject("postulantes",ciudadanoService.ciudadanosXanuncio(anuncioService.buscarPorId(id_anuncio)));
+		
+		return mav;
+	}
+	
+	@GetMapping("/contratar/{id_ciudadano}/{id_anuncio}")
+	public ModelAndView contratar(@PathVariable ("id_ciudadano")Long id_ciudadano,@PathVariable ("id_anuncio")Long id_anuncio) throws Exception {
+		Ciudadano_Anuncio ciudadano_anuncio=ciudadano_anuncioService.obtenerCiudadanoAnuncio();
+		Anuncio anuncio=anuncioService.buscarPorId(id_anuncio);
+		if(ciudadano_anuncioService.verificacionCiudadanoAnuncio(id_ciudadano, id_anuncio) && anuncio.getVacantes()!=0) {
+			
+			LOGGER.info("Contratacion exitosa");
+			Ciudadano ciudadano=ciudadanoService.buscarPorId(id_anuncio);
+			ciudadano_anuncio.setCiudadano(ciudadano);
+			int vacante=anuncio.getVacantes();
+			vacante=vacante--;
+			anuncio.setVacantes(vacante);
+			anuncioService.modificar(anuncio);
+			ciudadano_anuncio.setAnuncio(anuncio);
+			ciudadano_anuncioService.guardarCiudadanoAnuncio(ciudadano_anuncio);
+			ModelAndView mav = new ModelAndView("layouts/contrato");
+			return mav;
+			
+		}else {
+			LOGGER.error("No se pudo relizar la contratacion ");
+			ModelAndView mav = new ModelAndView("redirect:/verPostulantes");
+			return mav;
+		}
+		
+		
+	}
+	
+	
 	
 	
 }

@@ -113,39 +113,7 @@ public class Empleador extends Usuario{
 
 
 	
-	public Empleador(Long id,
-			String razon_social,
-			String nombre_comercial,
-			LocalDate inicio,
-			String email,
-			Long telefono,String direccion,
-			String provincia,
-			String pagina, String descripcion, boolean estado,
-			List<Anuncio> ofertas){
-		super();
-		this.id = id;
-		//this.cuit = cuit;
-		//this.password = password;
-		this.razon_social = razon_social;
-		this.nombre_comercial = nombre_comercial;
-		this.inicio = inicio;
-		this.email = email;
-		this.telefono = telefono;
-		this.direccion = direccion;
-		this.provincia = provincia;
-		this.pagina = pagina;
-		this.descripcion = descripcion;
-		this.estado = estado;
-		this.anuncios = ofertas;
 	
-	}
-
-
-
-
-
-
-
 
 	public List<Anuncio> getAnuncios() {
 		return anuncios;
@@ -171,20 +139,9 @@ public class Empleador extends Usuario{
 
 
 
-
-
-
-
-	
-
-
-
-
-
 	public String getRazon_social() {
 		return razon_social;
 	}
-
 
 
 
@@ -341,40 +298,6 @@ public class Empleador extends Usuario{
 		this.estado = estado;
 	}
 
-
-	
-
-
-	public List<Anuncio> getOfertas() {
-		return anuncios;
-	}
-
-
-
-
-
-
-
-
-
-
-	public void setOfertas(List<Anuncio> ofertas) {
-		this.anuncios = ofertas;
-	}
-
-
-
-
-
-
-	
-
-	public Empleador(Long id,
-			@NotEmpty(message = "Este campo no puede estar vacio") @Size(min = 8, message = "la contraseña debe tener como minimo 8 caracteres") String password,
-			String tipo, Long name) {
-		super(id, password, tipo, name);
-		// TODO Auto-generated constructor stub
-	}
 
 
 

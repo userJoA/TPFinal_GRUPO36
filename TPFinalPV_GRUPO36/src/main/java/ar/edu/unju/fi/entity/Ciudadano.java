@@ -92,10 +92,20 @@ public class Ciudadano extends Usuario{
 	
 	
 	@ManyToMany(cascade=CascadeType.ALL)
-	@JoinTable(name= "rel_ciudadanos_Anuncio",
+
+	@JoinTable(
+			name= "ciudadanos_Anuncio",
 			joinColumns= {@JoinColumn(name="CIUDADANO_ID")},
 			inverseJoinColumns= {@JoinColumn(name="ANUNCIO_ID")})	
 	private List <Anuncio> ofertas;
+	
+	@ManyToMany(cascade=CascadeType.ALL)
+	@JoinTable(
+			name= "ciudadanos_cursos",
+			joinColumns= {@JoinColumn(name="CIUDADANO_ID")},
+			inverseJoinColumns= {@JoinColumn(name="CURSO_ID")}
+			)	
+	private List <Curso> cursos;
 	
 
 	@OneToOne(fetch = FetchType.LAZY)
@@ -123,20 +133,14 @@ public class Ciudadano extends Usuario{
 	
 
 	
-
-	public List<Anuncio> getOfertas() {
-		return ofertas;
-	}
-
-
-
-
-
-
+	
+	
 
 	public List<Curso> getCursos() {
 		return cursos;
 	}
+
+
 
 
 
@@ -148,13 +152,20 @@ public class Ciudadano extends Usuario{
 
 
 
-	public void setOfertas(List<Anuncio> ofertas) {
-		this.ofertas = ofertas;
+
+
+
+	public List<Anuncio> getOfertas() {
+		return ofertas;
+
 	}
 
 
 
-	
+	public void setOfertas(List<Anuncio> ofertas) {
+		this.ofertas = ofertas;
+	}
+
 
 
 	public Usuario getUsuario() {
