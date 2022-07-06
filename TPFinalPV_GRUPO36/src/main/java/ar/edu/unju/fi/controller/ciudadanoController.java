@@ -134,14 +134,23 @@ public class ciudadanoController {
 	/*CREAR CV*/
 	  @GetMapping("/altaCV")
 	  public ModelAndView crearCV(@AuthenticationPrincipal User user) throws Exception {
-		  ModelAndView mav=new ModelAndView("ciudadano/cv_ciudadano");
+		  
 		  Ciudadano ciudadano= ciudadanoService.obtenerCiudadano();
 		  ciudadano=ciudadanoService.buscarPorDni(Long.parseLong(user.getUsername()));
-		  Curriculum cv= curriculumService.getCv();
-		  mav.addObject("curriculum", cv);
-		  mav.addObject("ciudadano", ciudadano);
-		  LOGGER.info("Method: /ciudadano/altaCV/  Action:Redirigiendo al formulario de curriculum");
-		  return mav;
+		  if(ciudadano.getCurriculum() != null){
+			 ModelAndView mav=new ModelAndView("layouts/doblecurriculum");
+			 return mav;
+		  }
+		  
+		  
+		  else{
+			  ModelAndView mav=new ModelAndView("ciudadano/cv_ciudadano");	  
+			  Curriculum cv= curriculumService.getCv();
+			  mav.addObject("curriculum", cv);
+			  mav.addObject("ciudadano", ciudadano);
+			  LOGGER.info("Method: /ciudadano/altaCV/  Action:Redirigiendo al formulario de curriculum");
+			  return mav;
+		  }
 	  }
 	  
 	  /*VER CV*/
@@ -173,11 +182,21 @@ public class ciudadanoController {
 	      public ModelAndView verAnuncios(@AuthenticationPrincipal User user) throws Exception {
 		  Ciudadano ciudadano= ciudadanoService.obtenerCiudadano();
 		  ciudadano=ciudadanoService.buscarPorDni(Long.parseLong(user.getUsername()));
-		  ModelAndView mav= new ModelAndView("ciudadano/lista_ofertas_laborales");
-		  mav.addObject("ciudadano",ciudadano);
-		  mav.addObject("ofertas", anuncioService.listarAnuncio());
-		  LOGGER.info("Method: /ciudadano/verAnuncios/  Action: Se muestra una lista de ofertas Laborales");
-		  return mav;
+		  if(ciudadano.getCurriculum()==null){
+			  LOGGER.error(ciudadano.getEmail()+" No creo un curriculum");
+			  ModelAndView mav=new ModelAndView("layouts/no_curriculum");
+			  return mav;
+		  }
+		  
+		  else
+		  {
+			  ModelAndView mav= new ModelAndView("ciudadano/lista_ofertas_laborales");
+			  mav.addObject("ciudadano",ciudadano);
+			  mav.addObject("ofertas", anuncioService.listarAnuncio());
+			  LOGGER.info("Method: /ciudadano/verAnuncios/  Action: Se muestra una lista de ofertas Laborales");
+			  return mav;
+			  
+		 }
 	  }
 	  
 	  
@@ -227,18 +246,12 @@ public class ciudadanoController {
 	  }
 	  
 	  
-	  /**/
+	  /*POSTULACION*/
 	  
 	  
 	  
 	  
 	  
-	  
-	  
-	  /*EDITAR PERFIL*/
-	  
-	// @GetMapping("/editarPerfil")
-	 
 	  
 	  
 	  

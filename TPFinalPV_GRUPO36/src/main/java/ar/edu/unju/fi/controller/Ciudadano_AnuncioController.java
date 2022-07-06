@@ -59,15 +59,16 @@ public class Ciudadano_AnuncioController {
 			ciuAnu.setAnuncio(anuncio);
 			ciudadano_anuncioService.guardarCiudadanoAnuncio(ciuAnu);
 			mav=new ModelAndView("layouts/Postulado");
+			return mav;
 			
 			
 		}else {
 			LOGGER.error("El ciudadano ya esta postulado");
-			
+			mav=new ModelAndView("layouts/no_Postulado");
+			return mav;
 		}
 		
 		
-		return null;
 		
 	}
 	
