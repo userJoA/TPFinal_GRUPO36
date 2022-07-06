@@ -1,20 +1,20 @@
 package ar.edu.unju.fi.service;
 
 
+import java.util.List;
+
 import ar.edu.unju.fi.entity.Curso;
-import ar.edu.unju.fi.util.ListaCurso;
+
 
 
 
 public interface ICursoService {
-	//public void guardarCurso(Curso curso);
-	//public Curso obtenerCurso();
-	//public List<Curso> obtenerCursos();
-	public ListaCurso listaCursos();
+	public boolean guardarCurso(Curso curso);
 	public Curso getCurso();
+	//public List<Curso> obtenerCursos();
 	
+	public Curso findById(long id);
 	
-	
-	
+	public List<Curso> getListaCursos();
 	
 }

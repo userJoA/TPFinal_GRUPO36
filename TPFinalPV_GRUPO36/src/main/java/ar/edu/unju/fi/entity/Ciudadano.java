@@ -18,14 +18,13 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
 import javax.validation.constraints.PositiveOrZero;
-import javax.validation.constraints.Size;
+
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
@@ -103,7 +102,13 @@ public class Ciudadano extends Usuario{
 	@PrimaryKeyJoinColumn
 	private Usuario usuario;
 	
-	
+	@ManyToMany(cascade=CascadeType.ALL)
+	@JoinTable(
+			name= "rel_ciudadanos_cursos",
+			joinColumns= {@JoinColumn(name="CIUDADANO_ID")},
+			inverseJoinColumns= {@JoinColumn(name="id_curso")}
+			)	
+	private List <Curso> cursos;
 	
 	
 	
@@ -125,6 +130,20 @@ public class Ciudadano extends Usuario{
 
 
 
+
+
+
+
+	public List<Curso> getCursos() {
+		return cursos;
+	}
+
+
+
+
+	public void setCursos(List<Curso> cursos) {
+		this.cursos = cursos;
+	}
 
 
 

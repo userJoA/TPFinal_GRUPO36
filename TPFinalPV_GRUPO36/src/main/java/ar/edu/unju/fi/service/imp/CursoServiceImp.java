@@ -1,5 +1,7 @@
 package ar.edu.unju.fi.service.imp;
 
+
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,42 +9,43 @@ import org.springframework.stereotype.Service;
 
 
 import ar.edu.unju.fi.entity.Curso;
-
+import ar.edu.unju.fi.repository.ICursoRepository;
 import ar.edu.unju.fi.service.ICursoService;
-import ar.edu.unju.fi.util.ListaCurso;
 
-@Service ("cursoServiceList")
+@Service ("cursoServiceImp")
 public class CursoServiceImp implements ICursoService {
 
-	
 	@Autowired
-	//ICursoRepository cursoRepositoryImp;
-	ListaCurso cursos;
-	
-	//@Override
-	//public Curso obtenerCurso() {
-	// TODO Auto-generated method stub
-	//	/return new Curso();
-	//}
+	private ICursoRepository cursoRepository;
 
 	@Override
-	
-	public ListaCurso listaCursos() {
-		
-		return cursos;
-		
+	public Curso findById(long id) {
+		// TODO Auto-generated method stub
+		return cursoRepository.findById(id);
 	}
-	
+
+	@Override
+	public List<Curso> getListaCursos() {
+		// TODO Auto-generated method stub
+		return cursoRepository.findAll();
+	}
 
 	@Override
 	public Curso getCurso() {
 		// TODO Auto-generated method stub
 		return new Curso();
 	}
-	public boolean guardarCandidato(Curso curso) {
-		//agregar un candidato
-		return ListaCurso.getCursos().add(curso);
+
+	@Override
+	public boolean guardarCurso(Curso curso) {
+		if(cursoRepository.save(curso) != null)
+			return true;
+		else
+			return false;
 	}
 	
+	
+	
+//ListaCurso getListaCursos() Curso getCurso() buscarCurso(Long id)
 
 }

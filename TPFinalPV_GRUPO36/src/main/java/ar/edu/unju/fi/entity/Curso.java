@@ -1,69 +1,144 @@
 package ar.edu.unju.fi.entity;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 
 
 
+
+@Entity
+@Table(name="curso")
 @Component
-//@Entity
-//@Table(name="curso")
 public class Curso {
-	//@Id
-	//@GeneratedValue(strategy = GenerationType.IDENTITY)
-	//@Column(name = "CODIGO", nullable = true)
-	//@Min(value=1, message="El valor mínimo es 1") @Max(value=9999,message="El valor máximo permitido es 9999")
-	private int codigo;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_curso")
+	private long id;
 	
-	//@Column(name = "TITULO")
-	//@NotEmpty(message="El título no puede ser vacío")
+	@Column(name = "TITULO")
+	@NotEmpty(message="El título no puede ser vacío")
 	private String titulo;
 	
-	//@Column(name = "FECHAINICIO")
-	//@NotNull @FutureOrPresent(message="La fecha debe ser hoy o posterior")
-	//@DateTimeFormat(pattern="yyyy-MM-dd")
+	@Column(name = "FECHAINICIO")
+	@NotNull @FutureOrPresent(message="La fecha debe ser hoy o posterior")
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private LocalDate fechaInicio;
 	
-	//@Column(name = "FECHAFINAL")
-	//@NotNull @Future(message="La fecha debe ser posterior a la actual")
-	//@DateTimeFormat(pattern="yyyy-MM-dd")
+	@Column(name = "FECHAFINAL")
+	@NotNull @Future(message="La fecha debe ser posterior a la actual")
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private LocalDate fechaFinal;
 	
-	//@Column(name = "CANTIDADHORA")
-	//@Min(value=1,message="Cantidad de horas debe ser mayor a 1")
+	@Column(name = "CANTIDAD_HORA")
+	@Min(value=1,message="Cantidad de horas debe ser mayor a 1")
 	private int cantidadHoras;
 	
-	//@Column(name = "MODALIDAD")
-	//@NotEmpty(message="Modalidad no puede ser vacío")
+	@Column(name = "MODALIDAD")
+	@NotEmpty(message="Modalidad no puede ser vacío")
 	private String modalidad;
 	
-	//@Autowired
-	//@ManyToOne(fetch=FetchType.LAZY)
-	//@JoinColumn(name ="LEGAJO")
-	//@NotNull(message="Debe seleccionar un docente")
-	private Docente docente;
 	
-	//@Column(name = "CATEGORIA")
-	//@NotEmpty(message="Categoría no puede ser vacío")
+	@Column(name = "CATEGORIA")
+	@NotEmpty(message="Categoría no puede ser vacío")
 	private String categoria;
 	
-	//@Column(name = "CUPO")
+	@Column(name = "CUPO")
 	private int cupo;
-	//
-	//@Column(name ="DETALLE")
-	private String detalle;
-	//
-	//
 	
-	public int getCodigo() {
-		return codigo;
+	@Column(name ="DETALLE")
+	private String detalle;
+	
+	@ManyToMany(mappedBy="cursos")
+	private List<Ciudadano> ciudadanos;
+	
+	@Column(name = "cur_estado")
+	private boolean estado;
+	
+
+
+
+	
+
+
+	public Curso(long id, @NotEmpty(message = "El título no puede ser vacío") String titulo,
+			@NotNull @FutureOrPresent(message = "La fecha debe ser hoy o posterior") LocalDate fechaInicio,
+			@NotNull @Future(message = "La fecha debe ser posterior a la actual") LocalDate fechaFinal,
+			@Min(value = 1, message = "Cantidad de horas debe ser mayor a 1") int cantidadHoras,
+			@NotEmpty(message = "Modalidad no puede ser vacío") String modalidad,
+			@NotEmpty(message = "Categoría no puede ser vacío") String categoria, int cupo, String detalle,
+			List<Ciudadano> ciudadanos, boolean estado) {
+		super();
+		this.id = id;
+		this.titulo = titulo;
+		this.fechaInicio = fechaInicio;
+		this.fechaFinal = fechaFinal;
+		this.cantidadHoras = cantidadHoras;
+		this.modalidad = modalidad;
+		this.categoria = categoria;
+		this.cupo = cupo;
+		this.detalle = detalle;
+		this.ciudadanos = ciudadanos;
+		this.estado = estado;
 	}
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
+
+
+	public List<Ciudadano> getCiudadanos() {
+		return ciudadanos;
 	}
+
+
+	public void setCiudadanos(List<Ciudadano> ciudadanos) {
+		this.ciudadanos = ciudadanos;
+	}
+
+
+	public boolean isEstado() {
+		return estado;
+	}
+
+
+	public void setEstado(boolean estado) {
+		this.estado = estado;
+	}
+
+
+	public long getId() {
+		return id;
+	}
+
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+
+	public List<Ciudadano> getCiudadano() {
+		return ciudadanos;
+	}
+
+
+	public void setCiudadano(List<Ciudadano> ciudadano) {
+		this.ciudadanos = ciudadano;
+	}
+
+
 	public String getTitulo() {
 		return titulo;
 	}
@@ -94,12 +169,6 @@ public class Curso {
 	public void setModalidad(String modalidad) {
 		this.modalidad = modalidad;
 	}
-	public Docente getDocente() {
-		return docente;
-	}
-	public void setDocente(Docente docente) {
-		this.docente = docente;
-	}
 	public String getCategoria() {
 		return categoria;
 	}
@@ -122,26 +191,10 @@ public class Curso {
 	public Curso() {
 		super();
 	}
-	public Curso(int codigo, String titulo, String categoria, LocalDate fechaInicio, LocalDate fechaFinal, int cantidadHoras,
-			String modalidad, Docente docente, int cupo, String detalle) {
-		super();
-		this.codigo = codigo;
-		this.titulo = titulo;
-		this.categoria = categoria;
-		this.fechaInicio = fechaInicio;
-		this.fechaFinal = fechaFinal;
-		this.cantidadHoras = cantidadHoras;
-		this.modalidad = modalidad;
-		this.docente = docente;
-		
-		this.cupo = cupo;
-		this.detalle = detalle;
-	}
 	
-
 	@Override
 	public String toString() {
-		return "Curso [codigo=" + codigo +"titulo="+titulo+"fechaInicio="+fechaInicio+ "fechaFinal="+fechaFinal+"cantidadHoras="+cantidadHoras+"modalidad="+modalidad+"docente="+docente+"categoria="+categoria+"cupo="+cupo+"detalle="+detalle + "]";
+		return "Curso [id=" + id +"titulo="+titulo+"fechaInicio="+fechaInicio+ "fechaFinal="+fechaFinal+"cantidadHoras="+cantidadHoras+"modalidad="+modalidad+"categoria="+categoria+"cupo="+cupo+"detalle="+detalle + "]";
 	}
 
 	
