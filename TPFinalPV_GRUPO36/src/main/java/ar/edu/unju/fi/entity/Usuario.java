@@ -39,7 +39,6 @@ public abstract class Usuario {
 	@Column(name = "usr_password") 
 	private String password;
 	
-	
 	@Column(name = "ciu_tipo") 
 	private String tipo;
 	

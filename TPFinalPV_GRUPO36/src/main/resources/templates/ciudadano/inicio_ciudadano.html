@@ -14,12 +14,26 @@
 </head>
 <body id="loginCiudadano">
 	
+	<header th:replace="/layouts/header::header"></header>
 	<header th:replace="layouts/navCiudadano :: navCiudadano"></header>
     
     <div class="container">                
-        
-       
-        
+        <main>
+	        <div class="card col-md-6 offset-md-3 traslucido text-white border-white p-4">				
+				<div class="card-header">
+					<h4>Bienvenido a tu cuenta</h4>						
+				</div>
+				<div class="card-body">
+					<p>Aquí podrás:</p>
+					<ul>
+						<li>Armar tu curriculum vitae</li>
+						<li>Postularte a ofertas laborales</li>
+						<li>Anotarte a cursos de capacitación</li>
+						<li>Conocer los intereses del mercado laboral</li>
+					</ul>
+				</div>					
+			</div>
+       </main>        
     </div>
     
     <footer th:replace="layouts/footer :: footer"></footer>

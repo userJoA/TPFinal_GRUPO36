@@ -76,7 +76,7 @@ public class ciudadanoController {
 			mav.addObject("ciudadano", ciudadano);
 			return mav;
 		}
-
+		ciudadano.setEstado(true);
 		ciudadanoService.guardarCiudadano(ciudadano);
 		LOGGER.info("Method: /ciudadano/formulario/  Action:se agrego un nuevo ciudadano");
 		ModelAndView mav = new ModelAndView("/ciudadano/lista_ciudadano");
