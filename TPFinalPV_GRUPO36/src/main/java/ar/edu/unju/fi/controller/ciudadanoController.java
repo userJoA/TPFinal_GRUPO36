@@ -20,9 +20,11 @@ import org.springframework.web.servlet.ModelAndView;
 import ar.edu.unju.fi.entity.Anuncio;
 import ar.edu.unju.fi.entity.Ciudadano;
 import ar.edu.unju.fi.entity.Curriculum;
+import ar.edu.unju.fi.entity.Curso;
 import ar.edu.unju.fi.service.IAnuncioService;
 import ar.edu.unju.fi.service.ICiudadanoService;
 import ar.edu.unju.fi.service.ICurriculumService;
+import ar.edu.unju.fi.service.ICursoService;
 
 @RequestMapping("/ciudadano")
 @Controller
@@ -36,6 +38,9 @@ public class ciudadanoController {
 	
 	@Autowired
 	private IAnuncioService anuncioService;
+	
+	@Autowired
+	private ICursoService cursoService;
 
 
 	private static final Log LOGGER = LogFactory.getLog(ciudadanoController.class);
@@ -129,14 +134,23 @@ public class ciudadanoController {
 	/*CREAR CV*/
 	  @GetMapping("/altaCV")
 	  public ModelAndView crearCV(@AuthenticationPrincipal User user) throws Exception {
-		  ModelAndView mav=new ModelAndView("ciudadano/cv_ciudadano");
+		  
 		  Ciudadano ciudadano= ciudadanoService.obtenerCiudadano();
 		  ciudadano=ciudadanoService.buscarPorDni(Long.parseLong(user.getUsername()));
-		  Curriculum cv= curriculumService.getCv();
-		  mav.addObject("curriculum", cv);
-		  mav.addObject("ciudadano", ciudadano);
-		  LOGGER.info("Method: /ciudadano/altaCV/  Action:Redirigiendo al formulario de curriculum");
-		  return mav;
+		  if(ciudadano.getCurriculum() != null){
+			 ModelAndView mav=new ModelAndView("layouts/doblecurriculum");
+			 return mav;
+		  }
+		  
+		  
+		  else{
+			  ModelAndView mav=new ModelAndView("ciudadano/cv_ciudadano");	  
+			  Curriculum cv= curriculumService.getCv();
+			  mav.addObject("curriculum", cv);
+			  mav.addObject("ciudadano", ciudadano);
+			  LOGGER.info("Method: /ciudadano/altaCV/  Action:Redirigiendo al formulario de curriculum");
+			  return mav;
+		  }
 	  }
 	  
 	  /*VER CV*/
@@ -144,13 +158,21 @@ public class ciudadanoController {
 	  public ModelAndView verCV(@AuthenticationPrincipal User user) throws Exception {
 		  Ciudadano ciudadano= ciudadanoService.obtenerCiudadano();
 		  ciudadano=ciudadanoService.buscarPorDni(Long.parseLong(user.getUsername()));
-		  ModelAndView mav=new ModelAndView("ciudadano/portal_ciudadano");
-		  Curriculum cv =new Curriculum();
-		  cv=ciudadano.getCurriculum();
-		  LOGGER.info(cv.getCurso());
-		  mav.addObject("curriculum", cv);
-		  LOGGER.info("Method: /ciudadano/verCV/  Action:Se muestra el curriculum de: " + ciudadano.getEmail());
-		  return mav;
+		  
+		  if(ciudadano.getCurriculum()==null){
+			  LOGGER.error(ciudadano.getEmail()+" No creo un curriculum");
+			  ModelAndView mav=new ModelAndView("layouts/no_curriculum");
+			  return mav;
+		  }
+		  else
+		  {
+			  ModelAndView mav=new ModelAndView("ciudadano/portal_ciudadano");
+			  Curriculum cv =new Curriculum();
+			  cv=ciudadano.getCurriculum();
+			  mav.addObject("curriculum", cv);
+			  LOGGER.info("Method: /ciudadano/verCV/  Action:Se muestra el curriculum de: " + ciudadano.getEmail());
+			  return mav;
+			 }
 		  
 	  }
 	  
@@ -160,11 +182,21 @@ public class ciudadanoController {
 	      public ModelAndView verAnuncios(@AuthenticationPrincipal User user) throws Exception {
 		  Ciudadano ciudadano= ciudadanoService.obtenerCiudadano();
 		  ciudadano=ciudadanoService.buscarPorDni(Long.parseLong(user.getUsername()));
-		  ModelAndView mav= new ModelAndView("ciudadano/lista_ofertas_laborales");
-		  mav.addObject("ciudadano",ciudadano);
-		  mav.addObject("ofertas", anuncioService.listarAnuncio());
-		  LOGGER.info("Method: /ciudadano/verAnuncios/  Action: Se muestra una lista de ofertas Laborales");
-		  return mav;
+		  if(ciudadano.getCurriculum()==null){
+			  LOGGER.error(ciudadano.getEmail()+" No creo un curriculum");
+			  ModelAndView mav=new ModelAndView("layouts/no_curriculum");
+			  return mav;
+		  }
+		  
+		  else
+		  {
+			  ModelAndView mav= new ModelAndView("ciudadano/lista_ofertas_laborales");
+			  mav.addObject("ciudadano",ciudadano);
+			  mav.addObject("ofertas", anuncioService.listarAnuncio());
+			  LOGGER.info("Method: /ciudadano/verAnuncios/  Action: Se muestra una lista de ofertas Laborales");
+			  return mav;
+			  
+		 }
 	  }
 	  
 	  
@@ -198,5 +230,46 @@ public class ciudadanoController {
 		
 		
 	  }
+	  
+	  /*CAPACITACION*/
+	  
+	  @GetMapping("/capacitacion")
+	  public ModelAndView capacitacionCiudadano(@AuthenticationPrincipal User user) throws Exception {
+		  Ciudadano ciudadano= ciudadanoService.obtenerCiudadano();
+		  ciudadano=ciudadanoService.buscarPorDni(Long.parseLong(user.getUsername()));
+		  ModelAndView mav= new ModelAndView("ciudadano/lista_curso");
+		  mav.addObject("cursos", cursoService.listaCursos());
+		  mav.addObject("ciudadano",ciudadano);
+		  
+		  LOGGER.info("Method: /ciudadano/capacitacion/  Action: accediendo a lista de cursos");
+		  return mav;
+	  }
+	  
+	  
+	  /*POSTULACION*/
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
 
 }

@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-
+import ar.edu.unju.fi.entity.Anuncio;
 import ar.edu.unju.fi.entity.Ciudadano;
 
 
@@ -22,5 +22,7 @@ public interface ICiudadanoRepository extends JpaRepository<Ciudadano,Long>{
 	
 	
 	public Optional<Ciudadano> findByName(Long name);
+	
+	public List<Ciudadano> findByOfertas(Anuncio anuncio);
 
 }

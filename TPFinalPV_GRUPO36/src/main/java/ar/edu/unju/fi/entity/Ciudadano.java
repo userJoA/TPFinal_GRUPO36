@@ -18,14 +18,13 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
 import javax.validation.constraints.PositiveOrZero;
-import javax.validation.constraints.Size;
+
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
@@ -93,10 +92,20 @@ public class Ciudadano extends Usuario{
 	
 	
 	@ManyToMany(cascade=CascadeType.ALL)
-	@JoinTable(name= "rel_ciudadanos_Anuncio",
+
+	@JoinTable(
+			name= "ciudadanos_Anuncio",
 			joinColumns= {@JoinColumn(name="CIUDADANO_ID")},
 			inverseJoinColumns= {@JoinColumn(name="ANUNCIO_ID")})	
 	private List <Anuncio> ofertas;
+	
+	@ManyToMany(cascade=CascadeType.ALL)
+	@JoinTable(
+			name= "ciudadanos_cursos",
+			joinColumns= {@JoinColumn(name="CIUDADANO_ID")},
+			inverseJoinColumns= {@JoinColumn(name="CURSO_ID")}
+			)	
+	private List <Curso> cursos;
 	
 
 	@OneToOne(fetch = FetchType.LAZY)
@@ -118,6 +127,26 @@ public class Ciudadano extends Usuario{
 	
 
 	
+	
+	
+
+	public List<Curso> getCursos() {
+		return cursos;
+	}
+
+
+
+
+
+
+	public void setCursos(List<Curso> cursos) {
+		this.cursos = cursos;
+	}
+
+
+
+
+
 
 	public List<Anuncio> getOfertas() {
 		return ofertas;
@@ -125,17 +154,10 @@ public class Ciudadano extends Usuario{
 
 
 
-
-
-
-
 	public void setOfertas(List<Anuncio> ofertas) {
 		this.ofertas = ofertas;
 	}
 
-
-
-	
 
 
 	public Usuario getUsuario() {

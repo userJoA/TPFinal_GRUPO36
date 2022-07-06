@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import ar.edu.unju.fi.entity.Anuncio;
 import ar.edu.unju.fi.entity.Ciudadano;
 import ar.edu.unju.fi.repository.ICiudadanoRepository;
 import ar.edu.unju.fi.service.ICiudadanoService;
@@ -88,6 +89,12 @@ public class CiudadanoServiceImp implements ICiudadanoService {
 	public Ciudadano buscarPorDni(Long dni) throws Exception {
 		
 		return ciudadanoRepository.findByName(dni).orElseThrow(()-> new Exception("El ciudadano no existe") );
+	}
+
+	@Override
+	public List<Ciudadano> ciudadanosXanuncio(Anuncio anuncio) {
+		
+		return ciudadanoRepository.findByOfertas(anuncio);
 	}
 
 	

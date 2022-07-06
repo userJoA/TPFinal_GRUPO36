@@ -1,7 +1,14 @@
 package ar.edu.unju.fi.entity;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
@@ -9,11 +16,11 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-//@Entity
-//@Table(name="curso")
+@Entity
+@Table(name="cursos")
 public class Curso {
-	//@Id
-	//@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	//@Column(name = "CODIGO", nullable = true)
 	//@Min(value=1, message="El valor mínimo es 1") @Max(value=9999,message="El valor máximo permitido es 9999")
 	private int codigo;
@@ -44,7 +51,7 @@ public class Curso {
 	//@ManyToOne(fetch=FetchType.LAZY)
 	//@JoinColumn(name ="LEGAJO")
 	//@NotNull(message="Debe seleccionar un docente")
-	private Docente docente;
+	//private Docente docente;
 	
 	//@Column(name = "CATEGORIA")
 	//@NotEmpty(message="Categoría no puede ser vacío")
@@ -57,7 +64,23 @@ public class Curso {
 	private String detalle;
 	//
 	//
+	@ManyToMany(mappedBy="cursos")
+	private List<Ciudadano> ciudadanos;
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	public List<Ciudadano> getCiudadanos() {
+		return ciudadanos;
+	}
+	public void setCiudadanos(List<Ciudadano> ciudadanos) {
+		this.ciudadanos = ciudadanos;
+	}
 	public int getCodigo() {
 		return codigo;
 	}
@@ -94,12 +117,12 @@ public class Curso {
 	public void setModalidad(String modalidad) {
 		this.modalidad = modalidad;
 	}
-	public Docente getDocente() {
-		return docente;
-	}
-	public void setDocente(Docente docente) {
-		this.docente = docente;
-	}
+	//public Docente getDocente() {
+	//	return docente;
+	//}
+	//public void setDocente(Docente docente) {
+	//	this.docente = docente;
+	//}
 	public String getCategoria() {
 		return categoria;
 	}
@@ -132,17 +155,14 @@ public class Curso {
 		this.fechaFinal = fechaFinal;
 		this.cantidadHoras = cantidadHoras;
 		this.modalidad = modalidad;
-		this.docente = docente;
+		//this.docente = docente;
 		
 		this.cupo = cupo;
 		this.detalle = detalle;
 	}
 	
 
-	@Override
-	public String toString() {
-		return "Curso [codigo=" + codigo +"titulo="+titulo+"fechaInicio="+fechaInicio+ "fechaFinal="+fechaFinal+"cantidadHoras="+cantidadHoras+"modalidad="+modalidad+"docente="+docente+"categoria="+categoria+"cupo="+cupo+"detalle="+detalle + "]";
-	}
+	
 
 	
 }
