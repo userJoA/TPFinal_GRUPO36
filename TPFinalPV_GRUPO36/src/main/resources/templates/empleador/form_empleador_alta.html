@@ -100,7 +100,7 @@
 									    <label class="col-lg-3 col-form-label form-control-label">Provincia</label>
 									    <div class="col-lg-9">
 									    	<select th:field="*{provincia}" class="form-control">
-												  <option value="Buenos Aires">Buenos Aires</option>
+												 <option value="Buenos Aires">Buenos Aires</option>
 <option value="Buenos Aires Capital">Buenos Aires Capital</option>
 <option value="Catamarca">Catamarca</option>
 <option value="Chaco">Chaco</option>
@@ -123,8 +123,9 @@
 <option value="Santa Fe">Santa Fe</option>
 <option value="Santiago del Estero">Santiago del Estero</option>
 <option value="Tierra del Fuego">Tierra del Fuego</option>
-<option value="Tucuman">Tucuman</option>
-											</select>
+<option value="Tucuman">Tucuman</option> 
+											</select></div>
+											<div class="text-danger" th:if="${#fields.hasErrors('provincia')}" th:errors="*{provincia}"></div>
 									    </div>
 											
 					  	  
