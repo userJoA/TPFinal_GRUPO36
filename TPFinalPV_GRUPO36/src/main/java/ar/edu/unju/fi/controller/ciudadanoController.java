@@ -318,6 +318,6 @@ public class ciudadanoController {
 	  
 	  
 	  
-r
+
 
 }

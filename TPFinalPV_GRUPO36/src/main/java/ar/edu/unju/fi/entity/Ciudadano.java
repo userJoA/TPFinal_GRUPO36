@@ -98,7 +98,7 @@ public class Ciudadano extends Usuario{
 			joinColumns= {@JoinColumn(name="CIUDADANO_ID")},
 			inverseJoinColumns= {@JoinColumn(name="ANUNCIO_ID")})	
 	private List <Anuncio> ofertas;
-	
+	/*
 	@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(
 			name= "ciudadanos_cursos",
@@ -106,7 +106,7 @@ public class Ciudadano extends Usuario{
 			inverseJoinColumns= {@JoinColumn(name="CURSO_ID")}
 			)	
 	private List <Curso> cursos;
-	
+	*/
 
 	@OneToOne(fetch = FetchType.LAZY)
 	@PrimaryKeyJoinColumn
