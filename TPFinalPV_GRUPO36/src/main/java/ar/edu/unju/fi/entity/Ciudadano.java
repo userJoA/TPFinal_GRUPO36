@@ -112,7 +112,13 @@ public class Ciudadano extends Usuario{
 	@PrimaryKeyJoinColumn
 	private Usuario usuario;
 	
-	
+	@ManyToMany(cascade=CascadeType.ALL)
+	@JoinTable(
+			name= "rel_ciudadanos_cursos",
+			joinColumns= {@JoinColumn(name="CIUDADANO_ID")},
+			inverseJoinColumns= {@JoinColumn(name="id_curso")}
+			)	
+	private List <Curso> cursos;
 	
 	
 	
@@ -148,8 +154,10 @@ public class Ciudadano extends Usuario{
 
 
 
+
 	public List<Anuncio> getOfertas() {
 		return ofertas;
+
 	}
 
 

@@ -3,7 +3,7 @@ package ar.edu.unju.fi.controller;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -38,9 +38,15 @@ public class ciudadanoController {
 	
 	@Autowired
 	private IAnuncioService anuncioService;
-	
+
+	@Autowired
+	@Qualifier("cursoServiceImp")
+	private ICursoService cursoService;
+
+	/*
 	@Autowired
 	private ICursoService cursoService;
+*/
 
 
 	private static final Log LOGGER = LogFactory.getLog(ciudadanoController.class);
@@ -231,7 +237,49 @@ public class ciudadanoController {
 		
 	  }
 	  
-	  /*CAPACITACION*/
+
+	  
+	  @GetMapping("/verCursos")
+      public ModelAndView verCursos(@AuthenticationPrincipal User user) throws Exception {
+	  Ciudadano ciudadano= ciudadanoService.obtenerCiudadano();
+	  ciudadano=ciudadanoService.buscarPorDni(Long.parseLong(user.getUsername()));
+	  ModelAndView mav= new ModelAndView("ciudadano/lista_curso");
+	  mav.addObject("ciudadano",ciudadano);
+	  mav.addObject("cursos",cursoService.getListaCursos());
+	  LOGGER.info("Method: /ciudadano/verCursos/  Action: Se muestra una lista de cursos");
+	  return mav;
+  }
+	  
+	  @GetMapping("/inscripcion/{id_ciu}/{id_curso}")
+	  public ModelAndView inscripcionCurso(@PathVariable ("id_ciu") Long id_ciu,@PathVariable ("id_curso") Long id_curso ) throws Exception {
+		  Ciudadano ciudadano=ciudadanoService.buscarPorId(id_ciu);
+		  Curso curso=cursoService.findById(id_curso);
+		  boolean inscripcion=true;
+		  for (Curso cur : ciudadano.getCursos()) {
+			  if(cur.getId()==id_curso)
+				  inscripcion=false;
+				  
+		  }
+		  
+		  if(inscripcion==true) {
+			  ciudadano.getCursos().add(curso);
+			  ciudadanoService.modificarCiudadano(ciudadano);
+			  ModelAndView mav=new ModelAndView("layouts/inscripcionExitosa");
+			  LOGGER.info("Method: /ciudadano/inscripcion/  Action: el usuario: " + ciudadano.getEmail() + " se ha inscripto a una curso");
+			  return mav;
+		  }
+		  else
+		  {
+			  ModelAndView mav = new ModelAndView("layouts/inscripcionFallida");
+			  LOGGER.info("Method: /ciudadano/inscripcion/  Action: el usuario ya se encuentra inscripto");
+			  return mav;
+		  }
+		
+		
+	  }
+	  
+
+	  /*CAPACITACION
 	  
 	  @GetMapping("/capacitacion")
 	  public ModelAndView capacitacionCiudadano(@AuthenticationPrincipal User user) throws Exception {
@@ -246,7 +294,7 @@ public class ciudadanoController {
 	  }
 	  
 	  
-	  /*POSTULACION*/
+	  POSTULACION*/
 	  
 	  
 	  
@@ -270,6 +318,6 @@ public class ciudadanoController {
 	  
 	  
 	  
-	  
+r
 
 }
